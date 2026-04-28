@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RecursiveMAS Animation</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+<style>
+  html, body { background: transparent !important; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: transparent;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 16px;
+  }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    padding: 32px;
+  }
+
+  .round-badge {
+    position: absolute;
+    top: 38px; left: 28px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    padding: 14px 26px;
+    border-radius: 14px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+    z-index: 20;
+  }
+  .round-badge.pulsing { animation: roundPulse 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  @keyframes roundPulse {
+    0%   { transform: scale(1);    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35); }
+    50%  { transform: scale(1.06); box-shadow: 0 6px 18px rgba(99, 102, 241, 0.50); }
+    100% { transform: scale(1);    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35); }
+  }
+
+  .replay-btn { display: none !important;
+    position: absolute;
+    top: 46px; right: 28px;
+    background: white;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 9px;
+    padding: 8px 16px;
+    font-size: 13px; font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 20;
+  }
+  .replay-btn:hover { border-color: #8b5cf6; color: #6d28d9; transform: translateY(-1px); }
+  .replay-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .question-box {
+    margin: 100px auto 18px;
+    width: 100%;
+    max-width: 880px;
+    background: #f8fafc;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+  }
+  .question-box .qb-title {
+    background: linear-gradient(135deg, #475569, #64748b);
+    color: white;
+    padding: 10px 18px;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  .question-box .qb-body { padding: 16px 20px; font-size: 14px; line-height: 1.65; color: #1f2937; }
+
+  /* Combined zone: SVG layer + agents row */
+  .agents-zone {
+    position: relative;
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+    height: 200px;
+  }
+
+  .loop-arrow-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 5;
+  }
+  /* Loop arrow stroke MATCHED to in-row OuterLink:
+     in-row link is 4px tall background bar → equivalent visual weight
+     = stroke-width 4 at default state, 5 when active. */
+  .loop-arrow-path {
+    fill: none;
+    stroke: #e5e7eb;          /* match in-row outer-link background color */
+    stroke-width: 4;          /* match in-row outer-link bar height */
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    transition: stroke 0.4s ease, stroke-width 0.4s ease;
+  }
+  .loop-arrow-path.active {
+    stroke: #8b5cf6;
+    stroke-width: 5;
+    filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.5));
+  }
+  .loop-arrow-head { fill: #d1d5db; transition: fill 0.4s ease; }
+  .loop-arrow-head.active { fill: #8b5cf6; }
+  /* Match font of in-row OuterLink::before label exactly:
+     9.5px / weight 600 / letter-spacing 0.3px / color #9ca3af */
+  .loop-arrow-label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    fill: #9ca3af;
+    letter-spacing: 0.3px;
+    transition: fill 0.4s ease;
+  }
+  .loop-arrow-label.active { fill: #6d28d9; }
+  .loop-pulse {
+    fill: white;
+    stroke: #8b5cf6;
+    stroke-width: 2;
+    opacity: 0;
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.7));
+  }
+
+  .agents-row {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .agent-unit {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+  }
+  .agent-box {
+    width: 150px; height: 100px;
+    background: white;
+    border: 2px solid #d1d5db;
+    border-radius: 11px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    transition: all 0.4s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .agent-box .agent-name { font-size: 14px; font-weight: 700; color: #1f2937; }
+  .agent-box .agent-sub { font-size: 10px; color: #9ca3af; margin-top: 3px; letter-spacing: 0.5px; }
+
+  .inner-link {
+    width: 22px; height: 100px;
+    background: #f3f4f6;
+    border: 1.5px solid #d1d5db;
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9.5px; font-weight: 600; letter-spacing: 0.3px;
+    color: #6b7280;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    transition: all 0.4s ease;
+  }
+
+  .agent-unit.active { transform: translateY(-14px) scale(1.07); z-index: 10; }
+  .agent-unit.active .agent-box {
+    border-color: #8b5cf6;
+    box-shadow: 0 8px 22px rgba(139, 92, 246, 0.28);
+    background: linear-gradient(135deg, #faf5ff, #ffffff);
+  }
+  .agent-unit.active .agent-box .agent-name { color: #6d28d9; }
+  .agent-unit.active .inner-link {
+    background: linear-gradient(180deg, #8b5cf6, #6366f1);
+    border-color: #8b5cf6;
+    color: white;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.45);
+  }
+
+  .generating-label {
+    position: absolute;
+    bottom: -28px;
+    left: 0;
+    width: 178px;
+    text-align: center;
+    font-size: 11.5px;
+    color: #8b5cf6; font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .agent-unit.active .generating-label.show { opacity: 1; }
+  .generating-label .dots { display: inline-block; min-width: 18px; text-align: left; }
+  .generating-label .dots span {
+    display: inline-block;
+    opacity: 0;
+    animation: dotBounce 1.2s infinite;
+  }
+  .generating-label .dots span:nth-child(1) { animation-delay: 0s; }
+  .generating-label .dots span:nth-child(2) { animation-delay: 0.2s; }
+  .generating-label .dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dotBounce {
+    0%, 80%, 100% { opacity: 0; transform: translateY(0); }
+    40%           { opacity: 1; transform: translateY(-2px); }
+  }
+
+  .outer-link {
+    position: relative;
+    width: 50px; height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+    flex-shrink: 0;
+  }
+  .outer-link::before {
+    content: 'OuterLink';
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9.5px;
+    color: #9ca3af; font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .outer-link::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 11px solid #d1d5db;
+    transition: border-left-color 0.4s ease;
+  }
+  .outer-link.active {
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    height: 5px;
+  }
+  .outer-link.active::after { border-left-color: #8b5cf6; }
+  .outer-link.active::before { color: #6d28d9; }
+  .outer-link .pulse {
+    position: absolute;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #8b5cf6;
+    top: 50%; left: 0;
+    transform: translateY(-50%);
+    opacity: 0;
+    box-shadow: 0 0 8px rgba(139, 92, 246, 0.6);
+  }
+  .outer-link.active .pulse { opacity: 1; animation: travel 0.8s ease-in-out; }
+  @keyframes travel {
+    0% { left: 0; }
+    100% { left: calc(100% - 11px); }
+  }
+
+  .lm-head {
+    position: absolute;
+    bottom: -38px;
+    left: 0;
+    width: 150px; height: 30px;
+    background: #f3f4f6;
+    border: 2px solid #d1d5db;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    color: #6b7280; letter-spacing: 0.5px;
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+  }
+  .lm-head.visible {
+    opacity: 1;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border-color: #059669;
+    color: white;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+  }
+
+
+  /* Looping chip — sits to the right-and-below LM Head, gently bobs each round */
+  .looping-chip {
+    position: absolute;
+    /* top & left set by JS based on real LM Head position */
+    height: 26px;
+    padding: 0 11px;
+    z-index: 8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1.5px dashed rgba(99, 102, 241, 0.45);
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #6366f1;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .looping-chip .lc-icon {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    color: #8b5cf6;
+  }
+  .looping-chip .lc-dots {
+    display: inline-block;
+    min-width: 14px;
+    text-align: left;
+  }
+  .looping-chip .lc-dots span {
+    display: inline-block;
+    opacity: 0;
+    animation: dotBounce 1.2s infinite;
+  }
+  .looping-chip .lc-dots span:nth-child(1) { animation-delay: 0s; }
+  .looping-chip .lc-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .looping-chip .lc-dots span:nth-child(3) { animation-delay: 0.4s; }
+  .looping-chip.bumping { animation: chipBump 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .looping-chip.generating {
+    background: rgba(16, 185, 129, 0.10);
+    border-color: rgba(16, 185, 129, 0.55);
+    color: #059669;
+  }
+  .looping-chip.generating .lc-icon { color: #10b981; }
+  .looping-chip.hidden { opacity: 0; transform: scale(0.9); pointer-events: none; }
+  @keyframes chipBump {
+    0%   { transform: scale(1);    box-shadow: 0 0 0 rgba(99,102,241,0.0); }
+    50%  { transform: scale(1.08); box-shadow: 0 4px 14px rgba(99,102,241,0.30); }
+    100% { transform: scale(1);    box-shadow: 0 0 0 rgba(99,102,241,0.0); }
+  }
+
+  .output-wrapper {
+    width: 100%;
+    max-width: 880px;
+    margin: 50px auto 0;
+  }
+  .output-label-outside {
+    color: #10b981;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: inline-block;
+    transition: color 0.4s ease;
+  }
+  .output-wrapper.streaming .output-label-outside { color: #34d399; }
+  .output-box {
+    width: 100%;
+    height: 280px;
+    background: #1f2937;
+    border-radius: 12px;
+    padding: 18px 22px;
+    color: #d1d5db;
+    line-height: 1.65;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+  .output-box::-webkit-scrollbar { width: 8px; }
+  .output-box::-webkit-scrollbar-track { background: #111827; border-radius: 4px; }
+  .output-box::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
+  .output-text { color: #f3f4f6; font-size: 13.5px; min-height: 100%; }
+  .output-text p { margin: 6px 0; }
+  .output-text b, .output-text strong { color: #fbbf24; }
+  .output-text .katex { color: #f3f4f6; }
+  .output-text .answer-final {
+    display: inline-block;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    margin-left: 4px;
+  }
+  .placeholder-text { color: #6b7280; font-style: italic; font-size: 13px; }
+  .buffer-region { color: #f3f4f6; white-space: pre-wrap; display: inline; }
+  .cursor {
+    display: inline-block;
+    width: 7px; height: 14px;
+    background: #10b981;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 0.8s infinite;
+  }
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <div class="round-badge" id="roundBadge">
+    Recursion Round <span id="roundNum">1</span>
+  </div>
+  <button class="replay-btn" id="replayBtn">↻ Replay</button>
+
+  <div class="question-box">
+    <div class="qb-title">Question · AIME 2026</div>
+    <div class="qb-body">
+      A plane contains points $A$ and $B$ with $AB = 1$. Point $A$ is rotated in the plane counterclockwise through an acute angle $\theta$ around point $B$ to point $A'$. Then $B$ is rotated in the plane clockwise through angle $\theta$ around point $A'$ to point $B'$. Suppose that $AB' = \frac{4}{3}$. The value of $\cos\theta$ can be written as $\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m + n$.
+    </div>
+  </div>
+
+  <div class="agents-zone" id="agentsZone">
+
+    <svg class="loop-arrow-svg" id="loopSvg"
+         xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 880 200">
+      <path id="loopPath" class="loop-arrow-path" d=""/>
+      <polygon id="loopHead" class="loop-arrow-head" points=""/>
+      <text id="loopLabel" class="loop-arrow-label" text-anchor="middle">OuterLink</text>
+      <circle id="loopPulse" class="loop-pulse" r="5.5" cx="0" cy="0"/>
+    </svg>
+
+    <div class="agents-row" id="agentsRow">
+      <div class="agent-unit" id="agent1">
+        <div class="agent-box" id="agent1Box">
+          <div class="agent-name">Planner Agent</div>
+          <div class="agent-sub">A₁</div>
+        </div>
+        <div class="inner-link">InnerLink</div>
+        <div class="generating-label show" id="genLabel1">Generating Latent Thoughts<span class="dots"><span>.</span><span>.</span><span>.</span></span></div>
+      </div>
+
+      <div class="outer-link" id="outer12"><div class="pulse"></div></div>
+
+      <div class="agent-unit" id="agent2">
+        <div class="agent-box">
+          <div class="agent-name">Critic Agent</div>
+          <div class="agent-sub">A₂</div>
+        </div>
+        <div class="inner-link">InnerLink</div>
+        <div class="generating-label show" id="genLabel2">Generating Latent Thoughts<span class="dots"><span>.</span><span>.</span><span>.</span></span></div>
+      </div>
+
+      <div class="outer-link" id="outer23"><div class="pulse"></div></div>
+
+      <div class="agent-unit" id="agent3">
+        <div class="agent-box" id="agent3Box">
+          <div class="agent-name">Solver Agent</div>
+          <div class="agent-sub">A₃</div>
+        </div>
+        <div class="inner-link" id="agent3InnerLink">InnerLink</div>
+        <div class="generating-label show" id="genLabel3">Generating Latent Thoughts<span class="dots"><span>.</span><span>.</span><span>.</span></span></div>
+        <div class="lm-head" id="lmHead">LM HEAD</div>
+      </div>
+    </div>
+
+    <!-- Looping chip lives at agents-zone level so Solver's scale transform doesn't affect it -->
+    <div class="looping-chip" id="loopingChip">
+      <span class="lc-icon" id="lcIcon">↻</span>
+      <span id="lcText">Looping</span>
+      <span class="lc-dots"><span>.</span><span>.</span><span>.</span></span>
+    </div>
+
+  </div>
+
+  <div class="output-wrapper" id="outputWrapper">
+    <div class="output-label-outside">▸ Final Output</div>
+    <div class="output-box" id="outputBox">
+      <div class="output-text" id="outputText">
+        <span class="placeholder-text" id="placeholder">Waiting for the system to complete recursive collaboration…</span>
+        <span id="stableRegion"></span><span class="buffer-region" id="bufferRegion"></span><span class="cursor" id="streamCursor" style="display:none;"></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+  const $ = (id) => document.getElementById(id);
+
+  const roundBadge   = $('roundBadge');
+  const roundNum     = $('roundNum');
+  const agent1       = $('agent1');
+  const agent2       = $('agent2');
+  const agent3       = $('agent3');
+  const agent1Box    = $('agent1Box');
+  const agent3Inner  = $('agent3InnerLink');
+  const outer12      = $('outer12');
+  const outer23      = $('outer23');
+  const lmHead       = $('lmHead');
+  const loopingChip  = $('loopingChip');
+  const genLabel1    = $('genLabel1');
+  const genLabel2    = $('genLabel2');
+  const genLabel3    = $('genLabel3');
+  const loopSvg      = $('loopSvg');
+  const loopPath     = $('loopPath');
+  const loopHead     = $('loopHead');
+  const loopLabel    = $('loopLabel');
+  const loopPulse    = $('loopPulse');
+  const outputBox    = $('outputBox');
+  const outputWrapper= $('outputWrapper');
+  const stableRegion = $('stableRegion');
+  const bufferRegion = $('bufferRegion');
+  const streamCursor = $('streamCursor');
+  const placeholder  = $('placeholder');
+  const replayBtn    = $('replayBtn');
+
+  const T = {
+    agentGenerate: 1300,
+    outerTravel: 750,
+    loopTravel: 1300,
+    roundTransition: 500,
+    initialDelay: 2000,
+    typeSpeed: 6,
+  };
+
+  /* ============ Build the loop arrow ============
+     Path (5 segments / 4 corners), all coords in SVG units == CSS pixels.
+       (1) start at A3 InnerLink right-mid, with a small EDGE GAP before drawing
+       (2) right ear (longer than before so it pulls away from the link)
+       (3) up to crossbar (yTop, lower than before so the bar sits closer to agents)
+       (4) left across top
+       (5) down to A1 mid-Y
+       (6) right ear → arrowhead pointing into A1 left edge (with edge gap)
+     ============================================================ */
+  function positionLoopingChip() {
+    const zoneRect = document.getElementById('agentsZone').getBoundingClientRect();
+    const lmRect   = lmHead.getBoundingClientRect();
+    // Place chip to the right of LM Head, vertically near its bottom
+    const left = lmRect.right - zoneRect.left + 8;
+    const top  = lmRect.bottom - zoneRect.top + 4;    // 4px below LM Head's bottom edge
+    loopingChip.style.left = left + 'px';
+    loopingChip.style.top  = top  + 'px';
+  }
+
+  function rebuildLoopArrow() {
+    const svgRect    = loopSvg.getBoundingClientRect();
+    const a1BoxRect  = agent1Box.getBoundingClientRect();
+    const a3InnerRect= agent3Inner.getBoundingClientRect();
+
+    const a3RightX = a3InnerRect.right - svgRect.left;
+    const a3MidY   = (a3InnerRect.top + a3InnerRect.bottom) / 2 - svgRect.top;
+    const a1LeftX  = a1BoxRect.left   - svgRect.left;
+    const a1MidY   = (a1BoxRect.top + a1BoxRect.bottom) / 2 - svgRect.top;
+
+    const edgeGap   = 14;         // larger gap so the line clearly leaves room around the InnerLink/box edges
+    const earLen    = 30;         // ear length
+    const yTop      = 42;         // crossbar Y — LOWER than before (was 16). Closer to agents.
+
+    // X anchors
+    const xExitStart = a3RightX + edgeGap;             // start of visible line (gap from link)
+    const xRightTurn = a3RightX + edgeGap + earLen;    // turn 1 (up)
+    const xLeftTurn  = a1LeftX  - edgeGap - earLen;    // turn 3 (down)
+    const xEnterEnd  = a1LeftX  - edgeGap;             // arrowhead tip (gap from box)
+
+    const ahLen  = 11;
+    const ahHalf = 7;
+    const lastTailX = xEnterEnd - ahLen;               // end of line just before arrowhead tip
+
+    const d = [
+      `M ${xExitStart} ${a3MidY}`,    // start with gap
+      `L ${xRightTurn} ${a3MidY}`,    // (1) right ear
+      `L ${xRightTurn} ${yTop}`,      // (2) up to crossbar
+      `L ${xLeftTurn}  ${yTop}`,      // (3) left across
+      `L ${xLeftTurn}  ${a1MidY}`,    // (4) down
+      `L ${lastTailX}  ${a1MidY}`     // (5) right ear, ending where arrowhead's rear begins
+    ].join(' ');
+    loopPath.setAttribute('d', d);
+
+    // Arrowhead tip with edge gap
+    const headPoints = [
+      `${xEnterEnd} ${a1MidY}`,
+      `${xEnterEnd - ahLen} ${a1MidY - ahHalf}`,
+      `${xEnterEnd - ahLen} ${a1MidY + ahHalf}`
+    ].join(' ');
+    loopHead.setAttribute('points', headPoints);
+
+    // Label centered along the crossbar, slightly above
+    const labelX = (xRightTurn + xLeftTurn) / 2;
+    const labelY = yTop - 9;
+    loopLabel.setAttribute('x', labelX);
+    loopLabel.setAttribute('y', labelY);
+  }
+
+  const activate   = (el) => el.classList.add('active');
+  const deactivate = (el) => el.classList.remove('active');
+
+  function pulseOuter(link) {
+    link.classList.add('active');
+    const p = link.querySelector('.pulse');
+    p.style.animation = 'none';
+    void p.offsetWidth;
+    p.style.animation = '';
+  }
+
+  async function animateLoopArrow() {
+    loopPath.classList.add('active');
+    loopHead.classList.add('active');
+    loopLabel.classList.add('active');
+
+    const pathLen = loopPath.getTotalLength();
+    const startTime = performance.now();
+    return new Promise((resolve) => {
+      function step(now) {
+        const t = Math.min((now - startTime) / T.loopTravel, 1);
+        const pt = loopPath.getPointAtLength(t * pathLen);
+        loopPulse.setAttribute('cx', pt.x);
+        loopPulse.setAttribute('cy', pt.y);
+        loopPulse.style.opacity = 1;
+        if (t < 1) requestAnimationFrame(step);
+        else {
+          loopPulse.style.opacity = 0;
+          loopPath.classList.remove('active');
+          loopHead.classList.remove('active');
+          loopLabel.classList.remove('active');
+          resolve();
+        }
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  function setRound(n) {
+    roundNum.textContent = n;
+    roundBadge.classList.remove('pulsing');
+    void roundBadge.offsetWidth;
+    roundBadge.classList.add('pulsing');
+    // Also bump the Looping chip in sync with the round badge
+    if (loopingChip) {
+      loopingChip.classList.remove('bumping');
+      void loopingChip.offsetWidth;
+      loopingChip.classList.add('bumping');
+    }
+  }
+
+  async function runRound(num, isFinal) {
+    setRound(num);
+    await sleep(200);
+
+    genLabel1.classList.add('show');
+    activate(agent1);
+    await sleep(T.agentGenerate);
+    deactivate(agent1);
+
+    pulseOuter(outer12);
+    await sleep(T.outerTravel);
+    outer12.classList.remove('active');
+
+    genLabel2.classList.add('show');
+    activate(agent2);
+    await sleep(T.agentGenerate);
+    deactivate(agent2);
+
+    pulseOuter(outer23);
+    await sleep(T.outerTravel);
+    outer23.classList.remove('active');
+
+    if (isFinal) {
+      agent3Inner.style.opacity = '0.25';
+      genLabel3.classList.remove('show');
+      lmHead.classList.add('visible');
+      loopingChip.classList.add('generating');
+      document.getElementById('lcIcon').textContent = '✦';
+      document.getElementById('lcText').textContent = 'Generating';
+    } else {
+      genLabel3.classList.add('show');
+    }
+    activate(agent3);
+    await sleep(T.agentGenerate);
+    deactivate(agent3);
+
+    if (!isFinal) {
+      await sleep(180);
+      rebuildLoopArrow();
+      positionLoopingChip();
+      await animateLoopArrow();
+      await sleep(T.roundTransition);
+    }
+  }
+
+  /* ============ Streaming with stable-render ============ */
+  const FINAL_ANSWER_HTML = `<p>To solve the problem, we analyze the geometric transformations and use the given distances to find $\\cos\\theta$.</p>
+<p><b>1. Initial Setup.</b> Points $A$ and $B$ lie in the plane with $AB = 1$. Rotate $A$ counterclockwise by an acute angle $\\theta$ around $B$ to get $A'$. Then rotate $B$ clockwise by $\\theta$ around $A'$ to get $B'$. We are given $AB' = \\tfrac{4}{3}$.</p>
+<p><b>2. Coordinate System.</b> Place $B = (0,0)$ and $A = (1,0)$.</p>
+<p><b>3. Rotation of Point $A$.</b> Rotating $A$ counterclockwise by $\\theta$ around $B$:
+$$A' = (\\cos\\theta,\\ \\sin\\theta).$$</p>
+<p><b>4. Rotation of Point $B$.</b> Using $B' = A' + R_{-\\theta}(B - A')$ with
+$$R_{-\\theta} = \\begin{pmatrix}\\cos\\theta & \\sin\\theta \\\\ -\\sin\\theta & \\cos\\theta\\end{pmatrix},$$
+and $B - A' = (-\\cos\\theta,\\ -\\sin\\theta)$, we get
+$$R_{-\\theta}(B-A') = \\begin{pmatrix}-1 \\\\ 0\\end{pmatrix},\\quad B' = (\\cos\\theta - 1,\\ \\sin\\theta).$$</p>
+<p><b>5. Distance $AB'$.</b>
+$$AB' = \\sqrt{(\\cos\\theta - 2)^2 + \\sin^2\\theta} = \\sqrt{5 - 4\\cos\\theta}.$$
+Setting $\\sqrt{5 - 4\\cos\\theta} = \\tfrac{4}{3}$ and squaring:
+$$5 - 4\\cos\\theta = \\tfrac{16}{9} \\;\\Longrightarrow\\; \\cos\\theta = \\tfrac{29}{36}.$$</p>
+<p><b>6. Final Answer.</b> Since $\\gcd(29, 36) = 1$, we have $m + n = 29 + 36 = 65$.</p>
+<p>Therefore, the answer is <span class="answer-final">65</span> ✓</p>`;
+
+  function segmentSafely(src) {
+    const segments = [];
+    let i = 0, lastCut = 0;
+    while (i < src.length) {
+      if (src[i] === '$' && src[i + 1] === '$') {
+        const end = src.indexOf('$$', i + 2);
+        if (end === -1) { i = src.length; break; }
+        i = end + 2;
+        segments.push(src.slice(lastCut, i));
+        lastCut = i;
+      } else if (src[i] === '$') {
+        const end = src.indexOf('$', i + 1);
+        if (end === -1) { i = src.length; break; }
+        i = end + 1;
+      } else {
+        i++;
+        if ((i - lastCut) >= 100) {
+          segments.push(src.slice(lastCut, i));
+          lastCut = i;
+        }
+      }
+    }
+    if (lastCut < src.length) segments.push(src.slice(lastCut));
+    return segments.filter(s => s.length > 0);
+  }
+
+  function renderKatexInString(htmlStr) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = htmlStr;
+    renderMathInElement(tmp, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$",  right: "$",  display: false}
+      ],
+      throwOnError: false
+    });
+    return tmp.innerHTML;
+  }
+
+  async function streamFinalAnswer() {
+    placeholder.style.display = 'none';
+    outputWrapper.classList.add('streaming');
+    stableRegion.innerHTML = '';
+    bufferRegion.textContent = '';
+    streamCursor.style.display = 'inline-block';
+
+    const segments = segmentSafely(FINAL_ANSWER_HTML);
+
+    for (const seg of segments) {
+      bufferRegion.textContent = '';
+      for (let k = 0; k < seg.length; k += 2) {
+        bufferRegion.textContent += seg.slice(k, k + 2);
+        outputBox.scrollTop = outputBox.scrollHeight;
+        await sleep(T.typeSpeed);
+      }
+      const rendered = renderKatexInString(bufferRegion.textContent);
+      stableRegion.insertAdjacentHTML('beforeend', rendered);
+      bufferRegion.textContent = '';
+      outputBox.scrollTop = outputBox.scrollHeight;
+    }
+    streamCursor.style.display = 'none';
+    outputWrapper.classList.remove('streaming');
+  }
+
+  function reset() {
+    [agent1, agent2, agent3].forEach(deactivate);
+    [outer12, outer23].forEach(l => l.classList.remove('active'));
+    lmHead.classList.remove('visible');
+    loopingChip.classList.remove('generating');
+    document.getElementById('lcIcon').textContent = '↻';
+    document.getElementById('lcText').textContent = 'Looping';
+    agent3Inner.style.opacity = '1';
+    [genLabel1, genLabel2, genLabel3].forEach(l => l.classList.add('show'));
+    stableRegion.innerHTML = '';
+    bufferRegion.textContent = '';
+    streamCursor.style.display = 'none';
+    placeholder.style.display = 'inline';
+    outputWrapper.classList.remove('streaming');
+    loopPath.classList.remove('active');
+    loopHead.classList.remove('active');
+    loopLabel.classList.remove('active');
+    loopPulse.style.opacity = 0;
+    roundNum.textContent = '1';
+  }
+
+  async function runAnimation() {
+    replayBtn.disabled = true;
+    reset();
+    await sleep(T.initialDelay);
+
+    renderMathInElement(document.querySelector('.question-box .qb-body'), {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$",  right: "$",  display: false}
+      ],
+      throwOnError: false
+    });
+
+    requestAnimationFrame(() => requestAnimationFrame(() => { rebuildLoopArrow(); positionLoopingChip(); }));
+
+    await runRound(1, false);
+    await runRound(2, false);
+    await runRound(3, true);
+
+    await sleep(300);
+    await streamFinalAnswer();
+
+    replayBtn.disabled = false;
+
+    // ===== AUTO-LOOP =====
+    // Wait a beat after the answer finishes, then restart the whole animation.
+    setTimeout(() => { runAnimation(); }, 2500);
+  }
+
+  replayBtn.addEventListener('click', runAnimation);
+
+  window.addEventListener('load', () => {
+    const tryStart = () => {
+      if (typeof renderMathInElement !== 'undefined') {
+        rebuildLoopArrow();
+        positionLoopingChip();
+        requestAnimationFrame(() => {
+          rebuildLoopArrow();
+          positionLoopingChip();
+          runAnimation();
+        });
+      } else {
+        setTimeout(tryStart, 50);
+      }
+    };
+    tryStart();
+  });
+
+  window.addEventListener('resize', () => { rebuildLoopArrow(); positionLoopingChip(); });
+</script>
+
+</body>
+</html>
