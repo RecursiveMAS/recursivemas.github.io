@@ -194,6 +194,16 @@
       background: linear-gradient(120deg, #4338ca, #0ea5e9);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
+      font-variant-numeric: tabular-nums;
+      display: inline-block;
+      transition: transform 0.18s ease;
+    }
+    .metric-num.is-rolling { opacity: 0.85; }
+    .metric-num.metric-pop { animation: metricPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    @keyframes metricPop {
+      0%   { transform: scale(1); }
+      45%  { transform: scale(1.18); }
+      100% { transform: scale(1); }
     }
     .metric-label { color: var(--rm-sub); font-size: 0.86rem; font-weight: 500; margin-top: 0.2rem; }
 
@@ -2042,15 +2052,111 @@
     track.scrollTo({ left: idx * exCardWidth(), behavior: 'smooth' });
   }
   document.addEventListener('DOMContentLoaded', function() {
-    var track = exGetTrack(); if (!track) return;
-    var dots = document.querySelectorAll('#exDots .ex-dot');
-    track.addEventListener('scroll', function() {
-      var w = exCardWidth();
-      if (!w) return;
-      var idx = Math.round(track.scrollLeft / w);
-      dots.forEach(function(d, i) { d.classList.toggle('is-active', i === idx); });
-    }, { passive: true });
+    var track = exGetTrack();
+    if (track) {
+      var dots = document.querySelectorAll('#exDots .ex-dot');
+      track.addEventListener('scroll', function() {
+        var w = exCardWidth();
+        if (!w) return;
+        var idx = Math.round(track.scrollLeft / w);
+        dots.forEach(function(d, i) { d.classList.toggle('is-active', i === idx); });
+      }, { passive: true });
+    }
+
+    /* ===== Slot-machine count-up for hero metric numbers ===== */
+    initMetricSlots();
   });
+
+  function initMetricSlots() {
+    var nums = document.querySelectorAll('.metric-num');
+    if (!nums.length) return;
+
+    nums.forEach(function(el) {
+      el.dataset.final = el.textContent;
+      el.dataset.played = '0';
+      // Lock width so randomized digits don't shift the layout
+      el.style.minWidth = el.getBoundingClientRect().width + 'px';
+    });
+
+    function rollOne(el, totalDuration) {
+      if (el.dataset.played === '1') return;
+      el.dataset.played = '1';
+
+      var finalText = el.dataset.final;
+      // Identify the digit positions; we'll lock them in left-to-right.
+      var chars = finalText.split('');
+      var digitIdx = [];
+      for (var i = 0; i < chars.length; i++) {
+        if (/[0-9]/.test(chars[i])) digitIdx.push(i);
+      }
+      if (!digitIdx.length) {
+        el.classList.add('metric-pop');
+        setTimeout(function(){ el.classList.remove('metric-pop'); }, 600);
+        return;
+      }
+
+      el.classList.add('is-rolling');
+      var lockedAt = digitIdx.map(function(){ return null; }); // ms when each digit locks
+      var lockOrder = digitIdx.slice(); // left to right
+
+      // Schedule each digit to lock progressively over the run
+      var settleStart = totalDuration * 0.35;
+      var settleEnd   = totalDuration * 0.95;
+      var step = (settleEnd - settleStart) / lockOrder.length;
+      lockOrder.forEach(function(_, k){ lockedAt[k] = settleStart + step * k; });
+
+      var start = performance.now();
+      var lastUpdate = 0;
+
+      function tick(now) {
+        var t = now - start;
+        if (t >= totalDuration) {
+          el.textContent = finalText;
+          el.classList.remove('is-rolling');
+          el.classList.add('metric-pop');
+          setTimeout(function(){ el.classList.remove('metric-pop'); }, 600);
+          return;
+        }
+
+        // Update at a slowing cadence
+        var interval = 45 + (t / totalDuration) * 110;
+        if (now - lastUpdate >= interval) {
+          var work = chars.slice();
+          for (var k = 0; k < digitIdx.length; k++) {
+            var pos = digitIdx[k];
+            if (t >= lockedAt[k]) {
+              work[pos] = finalText[pos]; // already locked
+            } else {
+              work[pos] = String(Math.floor(Math.random() * 10));
+            }
+          }
+          el.textContent = work.join('');
+          lastUpdate = now;
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // Trigger when metrics scroll into view (also fires immediately if already visible).
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, i) {
+          if (entry.isIntersecting) {
+            // Stagger slightly so the four cards roll one after another
+            var stagger = i * 120;
+            setTimeout(function(){ rollOne(entry.target, 1500); }, stagger);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      nums.forEach(function(el){ io.observe(el); });
+    } else {
+      nums.forEach(function(el, i){
+        setTimeout(function(){ rollOne(el, 1500); }, 120 * i);
+      });
+    }
+  }
 </script>
 
 </body>
