@@ -3,520 +3,2015 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <!-- Primary Meta Tags -->
-  <!-- TODO: Replace with your paper title and author names -->
-  <meta name="title" content="PAPER_TITLE - AUTHOR_NAMES">
-  <!-- TODO: Write a compelling 150-160 character description of your research -->
-  <meta name="description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Add 5-10 relevant keywords for your research area -->
-  <meta name="keywords" content="KEYWORD1, KEYWORD2, KEYWORD3, machine learning, computer vision, AI">
-  <!-- TODO: List all authors -->
-  <meta name="author" content="FIRST_AUTHOR_NAME, SECOND_AUTHOR_NAME">
+  <title>RecursiveMAS: Recursive Multi-Agent Systems</title>
+  <meta name="description" content="RecursiveMAS scales agent collaboration through latent-space recursion. With a lightweight RecursiveLink and an inner-outer loop training paradigm, RecursiveMAS delivers +8.3% accuracy, 1.2x-2.4x inference speedup, and up to 75.6% token reduction across 9 reasoning, science, code, and search benchmarks.">
+  <meta name="keywords" content="multi-agent system, recursive language model, latent reasoning, LLM agents, agent collaboration, RecursiveMAS, RecursiveLink, multi-agent LLM, latent collaboration">
+  <meta name="author" content="Xiyuan Yang, Jiaru Zou, Rui Pan, Ruizhong Qiu, Pan Lu, Shizhe Diao, Jindong Jiang, Hanghang Tong, Tong Zhang, Markus J. Buehler, Jingrui He, James Zou">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
-  <!-- TODO: Replace with your institution or lab name -->
-  <meta property="og:site_name" content="INSTITUTION_OR_LAB_NAME">
-  <!-- TODO: Same as paper title above -->
-  <meta property="og:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta property="og:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Replace with your actual website URL -->
-  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
-  <!-- TODO: Create a 1200x630px preview image and update path -->
-  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="PAPER_TITLE - Research Preview">
-  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
-  <meta property="article:author" content="FIRST_AUTHOR_NAME">
-  <meta property="article:section" content="Research">
-  <meta property="article:tag" content="KEYWORD1">
-  <meta property="article:tag" content="KEYWORD2">
+  <meta property="og:site_name" content="RecursiveMAS">
+  <meta property="og:title" content="Recursive Multi-Agent Systems">
+  <meta property="og:description" content="Scaling agent collaboration via latent-space recursion. +8.3% accuracy, up to 2.4x speedup, up to 75.6% fewer tokens across 9 benchmarks.">
+  <meta property="og:url" content="https://recursivemas.github.io">
+  <meta property="og:image" content="https://recursivemas.github.io/static/images/figures/RecursiveMAS.png">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <!-- TODO: Replace with your lab/institution Twitter handle -->
-  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
-  <!-- TODO: Replace with first author's Twitter handle -->
-  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
-  <!-- TODO: Same as paper title above -->
-  <meta name="twitter:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Same as social preview image above -->
-  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta name="twitter:image:alt" content="PAPER_TITLE - Research Preview">
+  <meta name="twitter:title" content="Recursive Multi-Agent Systems">
+  <meta name="twitter:description" content="Scaling agent collaboration via latent-space recursion.">
+  <meta name="twitter:image" content="https://recursivemas.github.io/static/images/figures/RecursiveMAS.png">
 
-  <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="PAPER_TITLE">
-  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
-  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
-  <meta name="citation_publication_date" content="2024">
-  <meta name="citation_conference_title" content="CONFERENCE_NAME">
-  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
-  
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#2563eb">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
-  <!-- Preconnect for performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com">
-  <link rel="preconnect" href="https://documentcloud.adobe.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <!-- Academic / Citation -->
+  <meta name="citation_title" content="Recursive Multi-Agent Systems">
+  <meta name="citation_author" content="Yang, Xiyuan">
+  <meta name="citation_author" content="Zou, Jiaru">
+  <meta name="citation_author" content="Pan, Rui">
+  <meta name="citation_author" content="Qiu, Ruizhong">
+  <meta name="citation_author" content="Lu, Pan">
+  <meta name="citation_author" content="Diao, Shizhe">
+  <meta name="citation_author" content="Jiang, Jindong">
+  <meta name="citation_author" content="Tong, Hanghang">
+  <meta name="citation_author" content="Zhang, Tong">
+  <meta name="citation_author" content="Buehler, Markus J.">
+  <meta name="citation_author" content="He, Jingrui">
+  <meta name="citation_author" content="Zou, James">
+  <meta name="citation_publication_date" content="2026">
 
-
-  <!-- TODO: Replace with your paper title and authors -->
-  <title>PAPER_TITLE - AUTHOR_NAMES | Academic Research</title>
-  
-  <!-- Favicon and App Icons -->
-  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico"> -->
+  <meta name="theme-color" content="#4338ca">
   <link rel="icon" type="image/x-icon" href="static/images/profile.png">
   <link rel="apple-touch-icon" href="static/images/profile.png">
-  
-  <!-- Critical CSS - Load synchronously -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <!-- Critical CSS -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  
-  <!-- Non-critical CSS - Load asynchronously -->
+
   <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  
-  <!-- Fallback for browsers that don't support preload -->
+
   <noscript>
     <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
     <link rel="stylesheet" href="static/css/bulma-slider.min.css">
     <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   </noscript>
-  
-  <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Defer non-critical JavaScript -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- MathJax for inline LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
   <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
   <script defer src="static/js/bulma-carousel.min.js"></script>
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
-  
-  <!-- Structured Data for Academic Papers -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
-    "headline": "PAPER_TITLE",
-    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
-    "author": [
-      {
-        "@type": "Person",
-        "name": "FIRST_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      },
-      {
-        "@type": "Person",
-        "name": "SECOND_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      }
-    ],
-    "datePublished": "2024-01-01",
-    "publisher": {
-      "@type": "Organization",
-      "name": "CONFERENCE_OR_JOURNAL_NAME"
-    },
-    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
-    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
-    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
-    "abstract": "FULL_ABSTRACT_TEXT_HERE",
-    "citation": "BIBTEX_CITATION_HERE",
-    "isAccessibleForFree": true,
-    "license": "https://creativecommons.org/licenses/by/4.0/",
-    "mainEntity": {
-      "@type": "WebPage",
-      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
-    },
-    "about": [
-      {
-        "@type": "Thing",
-        "name": "RESEARCH_AREA_1"
-      },
-      {
-        "@type": "Thing", 
-        "name": "RESEARCH_AREA_2"
-      }
-    ]
-  }
-  </script>
-  
-  <!-- Website/Organization Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "INSTITUTION_OR_LAB_NAME",
-    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
-    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
-    "sameAs": [
-      "https://twitter.com/YOUR_TWITTER_HANDLE",
-      "https://github.com/YOUR_GITHUB_USERNAME"
-    ]
-  }
-  </script>
+
+  <style>
+    :root {
+      --rm-primary: #4338ca;          /* indigo-700 */
+      --rm-primary-soft: #6366f1;     /* indigo-500 */
+      --rm-accent: #0ea5e9;           /* sky-500 */
+      --rm-accent-warm: #f59e0b;      /* amber-500 */
+      --rm-violet: #7c3aed;           /* violet-600 */
+      --rm-rose: #e11d48;             /* rose-600 */
+      --rm-emerald: #059669;          /* emerald-600 */
+      --rm-ink: #0f172a;
+      --rm-sub: #475569;
+      --rm-line: #e2e8f0;
+      --rm-bg-soft: #f8fafc;
+      --rm-bg-tint: linear-gradient(180deg, #f5f3ff 0%, #eef2ff 100%);
+    }
+
+    body { background: #fff; color: var(--rm-ink); }
+    .section { padding: 3rem 1.5rem; }
+
+    /* ====== HERO ====== */
+    .hero-banner {
+      position: relative;
+      padding: 4.5rem 1.5rem 3rem;
+      background:
+        radial-gradient(1200px 500px at 10% -10%, rgba(99,102,241,0.18), transparent 60%),
+        radial-gradient(800px 400px at 100% 0%, rgba(14,165,233,0.18), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      overflow: hidden;
+      border-bottom: 1px solid var(--rm-line);
+    }
+    .hero-banner::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 80%);
+      pointer-events: none;
+    }
+    .hero-banner > .container { position: relative; }
+    .pub-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.35rem 0.9rem; border-radius: 999px;
+      background: rgba(99,102,241,0.10);
+      color: var(--rm-primary);
+      font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em;
+      border: 1px solid rgba(99,102,241,0.25);
+    }
+    .pub-title {
+      font-weight: 800 !important;
+      letter-spacing: -0.02em;
+      background: linear-gradient(120deg, #1e1b4b 0%, #4338ca 45%, #0ea5e9 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 0.9rem !important; margin-bottom: 0.6rem !important;
+      font-size: clamp(1.85rem, 4.2vw, 3.25rem) !important;
+      line-height: 1.1 !important;
+    }
+    .pub-subtitle {
+      color: var(--rm-sub); font-weight: 500;
+      max-width: 880px; margin: 0 auto 1rem;
+      font-size: 1.08rem;
+    }
+    .pub-authors {
+      margin: 1.1rem auto 0.5rem; max-width: 940px;
+      line-height: 1.9; color: #1f2937;
+    }
+    .pub-authors a {
+      color: var(--rm-primary); font-weight: 600; text-decoration: none;
+      border-bottom: 1px dashed transparent; transition: all .2s ease;
+    }
+    .pub-authors a:hover { color: var(--rm-violet); border-bottom-color: var(--rm-violet); }
+    .pub-affil { color: var(--rm-sub); font-size: 0.95rem; margin-top: 0.4rem; }
+    .pub-affil .corr { color: var(--rm-sub); font-size: 0.85rem; }
+
+    .pub-links { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+    .pub-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.55rem 1.1rem; border-radius: 999px;
+      background: #0f172a; color: #fff !important; font-weight: 600;
+      font-size: 0.95rem; text-decoration: none;
+      box-shadow: 0 4px 14px rgba(15,23,42,0.18);
+      transition: all .2s ease; border: 1px solid rgba(255,255,255,0.1);
+    }
+    .pub-btn:hover { transform: translateY(-2px); background: var(--rm-primary); }
+    .pub-btn.is-disabled {
+      background: #fff; color: var(--rm-sub) !important;
+      border: 1px solid var(--rm-line); box-shadow: none; cursor: not-allowed;
+    }
+    .pub-btn.is-disabled:hover { transform: none; background: #fff; }
+    .pub-btn .icon { font-size: 1rem; }
+
+    /* ====== KEY METRIC PILLS ====== */
+    .metrics-strip {
+      display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 1rem; margin-top: 2.4rem;
+    }
+    @media (max-width: 768px) { .metrics-strip { grid-template-columns: repeat(2, 1fr); } }
+    .metric-card {
+      background: #fff; border: 1px solid var(--rm-line); border-radius: 18px;
+      padding: 1.1rem 1.2rem; text-align: center;
+      box-shadow: 0 4px 14px rgba(15,23,42,0.04);
+      transition: all .25s ease;
+    }
+    .metric-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(67,56,202,0.12); border-color: rgba(67,56,202,0.35); }
+    .metric-num {
+      font-size: 2rem; font-weight: 800; letter-spacing: -0.02em;
+      background: linear-gradient(120deg, #4338ca, #0ea5e9);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .metric-label { color: var(--rm-sub); font-size: 0.86rem; font-weight: 500; margin-top: 0.2rem; }
+
+    /* ====== SECTION TITLES ====== */
+    .rm-section-title {
+      font-weight: 800 !important; letter-spacing: -0.01em;
+      color: var(--rm-ink); position: relative; display: inline-block;
+    }
+    .rm-section-title::after {
+      content: ""; display: block; height: 4px; width: 56px; margin: 0.6rem auto 0;
+      border-radius: 4px; background: linear-gradient(90deg, var(--rm-primary), var(--rm-accent));
+    }
+    .rm-eyebrow {
+      color: var(--rm-primary); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      font-size: 0.78rem; margin-bottom: 0.4rem; display: block;
+    }
+    .rm-section-sub { color: var(--rm-sub); max-width: 880px; margin: 0.8rem auto 0; }
+
+    /* ====== ABSTRACT ====== */
+    .abstract-box {
+      background: var(--rm-bg-tint);
+      border: 1px solid #ddd6fe;
+      border-radius: 22px;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 10px 30px rgba(67,56,202,0.06);
+      position: relative;
+    }
+    .abstract-box::before {
+      content: "TL;DR"; position: absolute; top: -12px; left: 22px;
+      background: linear-gradient(120deg, var(--rm-primary), var(--rm-violet));
+      color: #fff; padding: 0.25rem 0.7rem; border-radius: 999px;
+      font-weight: 700; font-size: 0.72rem; letter-spacing: 0.16em;
+    }
+    .abstract-box p { color: #1f2937; line-height: 1.75; margin-bottom: 0.8rem; }
+    .highlight-pill {
+      display: inline-block; padding: 0.05rem 0.55rem;
+      background: rgba(245,158,11,0.18); color: #92400e;
+      border-radius: 6px; font-weight: 700;
+    }
+    .highlight-pill.acc { background: rgba(16,185,129,0.18); color: #065f46; }
+    .highlight-pill.speed { background: rgba(14,165,233,0.18); color: #075985; }
+    .highlight-pill.tok { background: rgba(244,63,94,0.18); color: #9f1239; }
+
+    /* ====== OVERVIEW / FIGURES ====== */
+    .figure-card {
+      background: #fff; border: 1px solid var(--rm-line); border-radius: 22px;
+      padding: 1.6rem; box-shadow: 0 10px 30px rgba(15,23,42,0.04);
+      margin: 0 auto;
+    }
+    .figure-card img { width: 100%; height: auto; display: block; border-radius: 10px; }
+    .figure-caption {
+      margin-top: 1rem; font-size: 0.95rem; color: var(--rm-sub); text-align: center; line-height: 1.6;
+    }
+    .figure-caption b { color: var(--rm-ink); }
+
+    /* ====== TWO-COL GRID ====== */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+    @media (max-width: 980px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    /* ====== COLLAB PATTERN CARDS ====== */
+    .pattern-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; margin-top: 2rem;
+    }
+    @media (max-width: 1100px) { .pattern-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .pattern-grid { grid-template-columns: 1fr; } }
+    .pattern-card {
+      background: #fff; border: 1px solid var(--rm-line); border-radius: 18px;
+      padding: 1.4rem; transition: all .25s ease;
+      box-shadow: 0 4px 14px rgba(15,23,42,0.04);
+      display: flex; flex-direction: column;
+    }
+    .pattern-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(67,56,202,0.12); }
+    .pattern-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+    .ic-seq { background: linear-gradient(135deg, #4338ca, #6366f1); }
+    .ic-mix { background: linear-gradient(135deg, #059669, #10b981); }
+    .ic-dis { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+    .ic-del { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
+    .pattern-card h4 {
+      font-weight: 800; font-size: 1.05rem; margin-bottom: 0.4rem; color: var(--rm-ink);
+    }
+    .pattern-card p { color: var(--rm-sub); font-size: 0.92rem; line-height: 1.55; margin-bottom: 0.7rem; }
+    .pattern-roles { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .pattern-roles.is-stacked { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+    .pattern-roles.is-stacked .role-chip { width: fit-content; }
+    .role-chip {
+      padding: 0.18rem 0.55rem; border-radius: 6px;
+      background: #eef2ff; color: var(--rm-primary);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600;
+    }
+
+    /* ====== TABLES ====== */
+    .rm-table-wrap { overflow-x: auto; border-radius: 18px; border: 1px solid var(--rm-line); background: #fff; box-shadow: 0 10px 24px rgba(15,23,42,0.04); }
+    table.rm-table {
+      width: 100%; border-collapse: collapse; font-size: 0.92rem;
+      font-family: 'Inter', sans-serif;
+    }
+    table.rm-table thead {
+      background: linear-gradient(180deg, #eef2ff 0%, #ede9fe 100%);
+    }
+    table.rm-table th {
+      padding: 0.85rem 0.9rem; text-align: center;
+      font-weight: 700; color: #312e81;
+      border-bottom: 2px solid #ddd6fe;
+      letter-spacing: 0.02em;
+    }
+    table.rm-table th:first-child, table.rm-table td:first-child { text-align: left; }
+
+    /* Agent-config table: all columns left-aligned, with vertically-centered rowspan'd cells */
+    table.rm-table.roles-table th,
+    table.rm-table.roles-table td { text-align: left; }
+    table.rm-table.roles-table td[rowspan] { vertical-align: middle; }
+
+    /* Collaboration-pattern color tags inside the agent-config table */
+    .pat-tag {
+      display: inline-block;
+      padding: 0.28rem 0.7rem;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      letter-spacing: 0.01em;
+      border: 1px solid transparent;
+      line-height: 1.2;
+    }
+    .pat-tag .pat-sub { font-weight: 600; opacity: 0.78; }
+    .pat-seq { background: rgba(99,102,241,0.12);  color: #4338ca; border-color: rgba(99,102,241,0.30); }
+    .pat-mix { background: rgba(16,185,129,0.13);  color: #047857; border-color: rgba(16,185,129,0.30); }
+    .pat-dis { background: rgba(245,158,11,0.16);  color: #b45309; border-color: rgba(245,158,11,0.32); }
+    .pat-del { background: rgba(14,165,233,0.13);  color: #0369a1; border-color: rgba(14,165,233,0.30); }
+    table.rm-table td {
+      padding: 0.7rem 0.9rem; text-align: center; color: #1f2937;
+      border-bottom: 1px solid var(--rm-line);
+    }
+    table.rm-table tr:last-child td { border-bottom: none; }
+    table.rm-table tbody tr:hover { background: #f8fafc; }
+    table.rm-table .row-ours {
+      background: linear-gradient(90deg, rgba(99,102,241,0.10), rgba(14,165,233,0.06));
+      font-weight: 700;
+    }
+    table.rm-table .row-ours td { color: #312e81; }
+    table.rm-table .group-head td {
+      background: #f1f5f9; color: var(--rm-sub); font-weight: 700;
+      font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.14em;
+      text-align: center; padding: 0.45rem; border-bottom: 1px solid var(--rm-line);
+    }
+    .delta-up { color: #059669; font-weight: 700; }
+    .delta-down { color: #b91c1c; font-weight: 700; }
+
+    /* ====== HIGHLIGHT GAINS ====== */
+    .gain-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin-top: 1.5rem;
+    }
+    @media (max-width: 900px) { .gain-grid { grid-template-columns: 1fr; } }
+    .gain-card {
+      background: #fff; border: 1px solid var(--rm-line); border-radius: 18px;
+      padding: 1.4rem; position: relative; overflow: hidden;
+    }
+    .gain-card::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
+      background: linear-gradient(90deg, var(--rm-primary), var(--rm-accent));
+    }
+    .gain-card .num {
+      font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em;
+      background: linear-gradient(120deg, var(--rm-primary), var(--rm-accent));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gain-card h5 { font-weight: 800; margin-top: 0.2rem; color: var(--rm-ink); }
+    .gain-card p { color: var(--rm-sub); font-size: 0.92rem; line-height: 1.55; }
+
+    /* ====== CASE STUDY ====== */
+    .case-studies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+    @media (max-width: 1100px) { .case-studies { grid-template-columns: 1fr; } }
+    .case-card {
+      border-radius: 20px; padding: 1.4rem 1.4rem 1.2rem;
+      border: 1px solid var(--rm-line); background: #fff;
+      box-shadow: 0 8px 22px rgba(15,23,42,0.05);
+      display: flex; flex-direction: column; gap: 0.65rem;
+      position: relative; overflow: hidden;
+    }
+    .case-card::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 5px;
+    }
+    .case-card.r1::before { background: linear-gradient(90deg, #f43f5e, #f97316); }
+    .case-card.r2::before { background: linear-gradient(90deg, #f59e0b, #06b6d4); }
+    .case-card.r3::before { background: linear-gradient(90deg, #6366f1, #10b981); }
+    .case-tag {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.25rem 0.65rem; border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 0.78rem;
+      width: fit-content;
+    }
+    .case-card.r1 .case-tag { background: rgba(244,63,94,0.10); color: #9f1239; }
+    .case-card.r2 .case-tag { background: rgba(245,158,11,0.12); color: #92400e; }
+    .case-card.r3 .case-tag { background: rgba(16,185,129,0.12); color: #065f46; }
+    .case-status {
+      font-weight: 700; font-size: 0.85rem; padding: 0.2rem 0.6rem; border-radius: 8px;
+      width: fit-content;
+    }
+    .case-card.r1 .case-status { background: rgba(244,63,94,0.12); color: #9f1239; }
+    .case-card.r2 .case-status, .case-card.r3 .case-status { background: rgba(16,185,129,0.14); color: #065f46; }
+    .case-card .case-body {
+      font-size: 0.9rem; line-height: 1.6; color: #1f2937;
+      background: #f8fafc; border-radius: 12px; padding: 0.85rem 0.95rem;
+      border: 1px dashed #cbd5e1; font-family: 'JetBrains Mono', monospace;
+      overflow-wrap: anywhere; word-break: break-word;
+      min-width: 0;
+    }
+    /* Allow MathJax-rendered math to wrap onto multiple lines instead of overflowing */
+    .case-card .case-body mjx-container[display="false"] { white-space: normal; }
+    .case-card .case-body mjx-container { max-width: 100%; }
+    .case-card .case-body em { color: var(--rm-sub); }
+    .case-card .case-answer {
+      font-family: 'JetBrains Mono', monospace; font-weight: 700;
+      padding: 0.45rem 0.7rem; border-radius: 10px; width: fit-content;
+    }
+    .case-card.r1 .case-answer { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+    .case-card.r2 .case-answer, .case-card.r3 .case-answer { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+    .case-question {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      color: #f5f3ff; border-radius: 18px; padding: 1.2rem 1.4rem;
+      margin-bottom: 1.4rem; box-shadow: 0 14px 30px rgba(67,56,202,0.18);
+    }
+    .case-question .label {
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #c7d2fe; font-weight: 700;
+    }
+    .case-question p { color: #ede9fe; margin-top: 0.4rem; line-height: 1.7; }
+
+    /* ====== BIBTEX / CITE ====== */
+    .bibtex-box {
+      background: #0f172a; color: #e2e8f0;
+      border-radius: 18px; padding: 1.3rem 1.5rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.86rem;
+      overflow-x: auto;
+      box-shadow: 0 18px 40px rgba(15,23,42,0.18);
+      position: relative;
+    }
+    .bibtex-box pre { background: transparent !important; color: inherit !important; padding: 0 !important; margin: 0 !important; white-space: pre; }
+    .bibtex-copy {
+      position: absolute; top: 0.9rem; right: 1rem;
+      background: rgba(255,255,255,0.08); color: #e2e8f0;
+      padding: 0.35rem 0.7rem; border-radius: 8px; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.12); font-size: 0.78rem;
+    }
+    .bibtex-copy:hover { background: rgba(255,255,255,0.16); }
+
+    /* ====== FOOTER ====== */
+    footer.footer { background: #f8fafc; border-top: 1px solid var(--rm-line); }
+    footer .content { color: var(--rm-sub); }
+    footer .content a { color: var(--rm-primary); }
+
+    /* ====== SECTION ALT BG ====== */
+    .rm-bg-soft { background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); }
+    .rm-bg-tint { background: linear-gradient(180deg, #f5f3ff 0%, #eef2ff 100%); }
+    .rm-bg-dark { background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 100%); color: #e0e7ff; }
+    .rm-bg-dark .rm-section-title { color: #fff; }
+    .rm-bg-dark .rm-section-sub { color: #c7d2fe; }
+    .rm-bg-dark .rm-eyebrow { color: #a5b4fc; }
+
+    /* ====== INSIGHT BOX ====== */
+    .insight-box {
+      border-left: 4px solid var(--rm-violet);
+      background: #fafaff;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      color: #1f2937;
+      font-style: italic;
+    }
+    .insight-box b { color: var(--rm-violet); font-style: normal; }
+
+    /* ====== ARCHITECTURE PILLARS ====== */
+    .pillars {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin-top: 1.5rem;
+    }
+    @media (max-width: 900px) { .pillars { grid-template-columns: 1fr; } }
+    .pillar {
+      background: #fff; border: 1px solid var(--rm-line);
+      border-radius: 18px; padding: 1.3rem 1.4rem; transition: all .2s ease;
+    }
+    .pillar:hover { border-color: rgba(99,102,241,0.4); transform: translateY(-3px); }
+    .pillar .pnum {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 800; color: #fff;
+      background: linear-gradient(135deg, var(--rm-primary), var(--rm-violet));
+      margin-bottom: 0.7rem;
+    }
+    .pillar h4 { font-weight: 800; color: var(--rm-ink); }
+    .pillar p { color: var(--rm-sub); font-size: 0.93rem; line-height: 1.6; margin-top: 0.3rem; }
+    .pillar code {
+      background: #eef2ff; color: var(--rm-primary);
+      padding: 0.05rem 0.4rem; border-radius: 5px; font-weight: 600;
+    }
+
+    /* ====== EQUATION BLOCK ====== */
+    .eq-block {
+      background: #fff; border: 1px solid var(--rm-line); border-radius: 14px;
+      padding: 1rem 1.2rem; box-shadow: 0 4px 14px rgba(15,23,42,0.04);
+      overflow-x: auto;
+    }
+
+    /* ====== ARCHITECTURE BLOCKS (3-part layout) ====== */
+    .arch-block {
+      margin-top: 2.5rem; padding-top: 2rem;
+      border-top: 1px dashed #e2e8f0;
+    }
+    .arch-block:first-of-type { margin-top: 0.5rem; padding-top: 0; border-top: none; }
+    .arch-step {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.2rem;
+    }
+    .arch-step-num {
+      display: inline-flex; align-items: center;
+      padding: 0.25rem 0.75rem; border-radius: 999px;
+      background: linear-gradient(120deg, var(--rm-primary), var(--rm-violet));
+      color: #fff; font-weight: 700; font-size: 0.78rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+    }
+    .arch-step-title {
+      font-weight: 800; color: var(--rm-ink);
+      font-size: 1.5rem; letter-spacing: -0.01em; margin: 0;
+    }
+
+    .arch-row {
+      display: grid; grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.6rem; align-items: start;
+    }
+    @media (max-width: 980px) { .arch-row { grid-template-columns: 1fr; } }
+    .arch-text p { color: #1f2937; line-height: 1.7; margin-bottom: 0.7rem; }
+    .arch-text code {
+      background: #eef2ff; color: var(--rm-primary);
+      padding: 0.05rem 0.4rem; border-radius: 5px; font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .arch-figure { position: sticky; top: 1rem; }
+    @media (max-width: 980px) { .arch-figure { position: static; } }
+
+    /* Inner / Outer link cards */
+    .link-card {
+      background: #fff; border: 1px solid var(--rm-line);
+      border-radius: 14px; padding: 0.95rem 1.1rem;
+      margin-top: 0.9rem;
+      box-shadow: 0 4px 14px rgba(15,23,42,0.04);
+    }
+    .link-card-head {
+      display: flex; align-items: center; gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .link-badge {
+      padding: 0.2rem 0.65rem; border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+      font-weight: 700; color: #fff;
+    }
+    .link-badge.in  { background: linear-gradient(135deg, #4338ca, #6366f1); }
+    .link-badge.out { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
+    .link-card-sub {
+      color: var(--rm-sub); font-size: 0.85rem; font-weight: 500;
+    }
+    .link-card p { margin-bottom: 0.55rem; font-size: 0.95rem; }
+    .link-card .eq-block { padding: 0.7rem 0.9rem; }
+
+    /* Architecture explanation lists */
+    .arch-explain p { color: #1f2937; line-height: 1.7; }
+    .arch-list {
+      list-style: none; padding: 0; margin: 0.8rem 0 0;
+      display: grid; gap: 0.75rem;
+    }
+    .arch-list li {
+      background: #fff; border: 1px solid var(--rm-line);
+      border-left: 4px solid var(--rm-primary-soft);
+      border-radius: 12px; padding: 0.85rem 1.05rem;
+      color: #1f2937; line-height: 1.65; font-size: 0.96rem;
+      box-shadow: 0 4px 14px rgba(15,23,42,0.03);
+    }
+    .arch-list li b { color: var(--rm-primary); }
+
+    /* Training cards (inner / outer loop) */
+    .train-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    @media (max-width: 900px) { .train-grid { grid-template-columns: 1fr; } }
+    .train-card {
+      background: #fff; border: 1px solid var(--rm-line);
+      border-radius: 14px; padding: 1rem 1.15rem;
+      box-shadow: 0 4px 14px rgba(15,23,42,0.04);
+    }
+    .train-tag {
+      display: inline-block; padding: 0.22rem 0.7rem;
+      border-radius: 8px; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem; font-weight: 700; letter-spacing: 0.04em;
+      margin-bottom: 0.55rem; color: #fff;
+    }
+    .train-tag.inner { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+    .train-tag.outer { background: linear-gradient(135deg, #4338ca, #0ea5e9); }
+    .train-card p { color: #1f2937; line-height: 1.65; font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .train-card .eq-block { padding: 0.7rem 0.9rem; }
+
+    /* ====== EXAMPLES CAROUSEL (Appendix G) ====== */
+    .ex-bg {
+      background:
+        radial-gradient(900px 380px at 0% 0%, rgba(99,102,241,0.10), transparent 60%),
+        radial-gradient(900px 380px at 100% 100%, rgba(14,165,233,0.10), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+    .carousel-wrap { position: relative; margin-top: 1rem; }
+
+    .ex-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(min(640px, 92%), 1fr);
+      gap: 1.4rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.5rem 0.4rem 1.4rem;
+      scroll-padding-inline: 0.4rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(99,102,241,0.4) transparent;
+    }
+    .ex-track::-webkit-scrollbar { height: 8px; }
+    .ex-track::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.4); border-radius: 4px; }
+
+    .ex-card {
+      scroll-snap-align: start;
+      background: #fff;
+      border: 1px solid var(--rm-line);
+      border-radius: 22px;
+      padding: 1.4rem 1.5rem 1.5rem;
+      box-shadow: 0 14px 32px rgba(15,23,42,0.06);
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    .ex-card::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 5px;
+      background: linear-gradient(90deg, var(--c1, #4338ca), var(--c2, #0ea5e9));
+    }
+    .ex-card[data-accent="math"]   { --c1: #4338ca; --c2: #6366f1; }
+    .ex-card[data-accent="med"]    { --c1: #059669; --c2: #10b981; }
+    .ex-card[data-accent="code"]   { --c1: #f59e0b; --c2: #ef4444; }
+    .ex-card[data-accent="search"] { --c1: #0ea5e9; --c2: #6366f1; }
+
+    .ex-head {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem; margin-bottom: 0.9rem;
+    }
+    .ex-badge {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.3rem 0.75rem; border-radius: 999px;
+      font-weight: 700; font-size: 0.82rem;
+      color: #fff;
+      background: linear-gradient(120deg, var(--c1), var(--c2));
+      box-shadow: 0 6px 14px rgba(15,23,42,0.10);
+    }
+    .ex-bench {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--rm-sub);
+      padding: 0.2rem 0.6rem; border-radius: 8px;
+      background: #f1f5f9;
+    }
+
+    .ex-question {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      color: #ede9fe; border-radius: 14px;
+      padding: 0.95rem 1.1rem; margin-bottom: 0.9rem;
+      box-shadow: 0 10px 24px rgba(67,56,202,0.18);
+    }
+    .ex-q-label {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #c7d2fe; font-weight: 700;
+    }
+    .ex-question p { color: #ede9fe; margin-top: 0.35rem; line-height: 1.6; font-size: 0.93rem; }
+    .ex-choices {
+      list-style: none; padding: 0; margin: 0.55rem 0 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 1rem;
+      font-size: 0.88rem; color: #c7d2fe;
+    }
+    @media (max-width: 600px) { .ex-choices { grid-template-columns: 1fr; } }
+    .ex-choices li b { color: #fde68a; font-family: 'JetBrains Mono', monospace; }
+
+    .ex-rounds { display: flex; flex-direction: column; gap: 0.55rem; }
+    .ex-round {
+      border-radius: 12px; padding: 0.7rem 0.9rem;
+      border: 1px solid var(--rm-line);
+      background: #fafaff;
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .ex-round-tag {
+      flex-shrink: 0;
+      padding: 0.18rem 0.6rem; border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace; font-weight: 700;
+      font-size: 0.74rem; letter-spacing: 0.05em;
+      background: #eef2ff; color: var(--rm-primary);
+    }
+    .ex-round-tag.final {
+      background: linear-gradient(120deg, var(--c1), var(--c2));
+      color: #fff;
+    }
+    .ex-flow {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--rm-sub); font-size: 0.85rem;
+    }
+
+    .ex-round.final {
+      background: #fff;
+      flex-direction: column; align-items: stretch; gap: 0.7rem;
+      padding: 0.95rem 1.05rem;
+      border-color: rgba(99,102,241,0.25);
+      box-shadow: 0 6px 16px rgba(99,102,241,0.06);
+    }
+    .ex-round.final .ex-round-tag.final { align-self: flex-start; }
+    .ex-final-body p {
+      color: #1f2937; line-height: 1.65; font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+    }
+    .ex-final-body p:last-child { margin-bottom: 0; }
+    .ex-code {
+      background: #0f172a; color: #e2e8f0;
+      border-radius: 10px; padding: 0.85rem 1rem;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+      line-height: 1.55; overflow-x: auto;
+      margin: 0.4rem 0;
+    }
+    .ex-code code { background: transparent; color: inherit; padding: 0; }
+    .ex-answer {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      width: fit-content; padding: 0.4rem 0.8rem;
+      border-radius: 999px; font-weight: 700; font-size: 0.9rem;
+      background: rgba(16,185,129,0.13); color: #047857;
+      border: 1px solid rgba(16,185,129,0.30);
+    }
+
+    .carousel-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 5; width: 44px; height: 44px;
+      border: 1px solid var(--rm-line); border-radius: 50%;
+      background: #fff; color: var(--rm-primary);
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 8px 20px rgba(15,23,42,0.10);
+      transition: all 0.2s ease;
+    }
+    .carousel-arrow:hover {
+      background: var(--rm-primary); color: #fff; transform: translateY(-50%) scale(1.05);
+    }
+    .carousel-arrow.prev { left: -22px; }
+    .carousel-arrow.next { right: -22px; }
+    @media (max-width: 980px) {
+      .carousel-arrow.prev { left: 6px; }
+      .carousel-arrow.next { right: 6px; }
+    }
+
+    .ex-dots {
+      display: flex; justify-content: center; gap: 0.45rem; margin-top: 0.6rem;
+    }
+    .ex-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #cbd5e1; border: none; padding: 0; cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .ex-dot:hover { background: var(--rm-primary-soft); }
+    .ex-dot.is-active {
+      width: 28px; border-radius: 999px;
+      background: linear-gradient(90deg, var(--rm-primary), var(--rm-accent));
+    }
+
+    /* hide more-works in this layout */
+    .more-works-container { display: none !important; }
+  </style>
 </head>
 <body>
 
+<!-- Scroll to Top Button -->
+<button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+  <i class="fas fa-chevron-up"></i>
+</button>
 
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
+<main id="main-content">
 
-  <!-- More Works Dropdown -->
-  <div class="more-works-container">
-    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
-      <i class="fas fa-flask"></i>
-      More Works
-      <i class="fas fa-chevron-down dropdown-arrow"></i>
-    </button>
-    <div class="more-works-dropdown" id="moreWorksDropdown">
-      <div class="dropdown-header">
-        <h4>More Works from Our Lab</h4>
-        <button class="close-btn" onclick="toggleMoreWorks()">
-          <i class="fas fa-times"></i>
-        </button>
+<!-- ==============================================Scaling agent collaboration through latent-space recursion==============
+     HERO
+============================================================ -->
+<section class="hero-banner">
+  <div class="container is-max-desktop has-text-centered">
+    <span class="pub-eyebrow">
+      <i class="fas fa-infinity"></i>
+      Recursive Multi-Agent Framework
+    </span>
+    <h1 class="title pub-title">Recursive Multi-Agent Systems</h1>
+    <p class="pub-subtitle">
+      Scaling agent collaboration through latent-space recursion.
+    </p>
+
+    <div class="pub-authors">
+      <a href="https://scholar.google.com/citations?user=dzpchdAAAAAJ&hl=en" target="_blank">Xiyuan Yang</a><sup>1,*</sup>,
+      <a href="https://scholar.google.com/citations?user=GzLTey4AAAAJ&hl=en" target="_blank">Jiaru Zou</a><sup>1,2,*,&dagger;</sup>,
+      <a href="https://research4pan.github.io/" target="_blank">Rui Pan</a><sup>1</sup>,
+      <a href="https://q-rz.github.io/" target="_blank">Ruizhong Qiu</a><sup>1</sup>,
+      <a href="https://lupantech.github.io/" target="_blank">Pan Lu</a><sup>2</sup>,
+      <a href="https://shizhediao.github.io/" target="_blank">Shizhe Diao</a><sup>3</sup>,
+      <a href="https://www.jindongjiang.me/" target="_blank">Jindong Jiang</a><sup>3</sup>,
+      <a href="http://tonghanghang.org/" target="_blank">Hanghang Tong</a><sup>1</sup>,
+      <a href="https://tongzhang-ml.org/" target="_blank">Tong Zhang</a><sup>1</sup>,
+      <a href="https://cee.mit.edu/people_individual/markus-j-buehler/" target="_blank">Markus J. Buehler</a><sup>4</sup>,
+      <a href="https://www.hejingrui.org/" target="_blank">Jingrui He</a><sup>1,&#9993;</sup>,
+      <a href="https://www.james-zou.com/" target="_blank">James Zou</a><sup>2,&#9993;</sup>
+    </div>
+
+    <div class="pub-affil">
+      <span><sup>1</sup> UIUC &nbsp;&middot;&nbsp; <sup>2</sup> Stanford University &nbsp;&middot;&nbsp; <sup>3</sup> NVIDIA &nbsp;&middot;&nbsp; <sup>4</sup> MIT</span>
+      <div class="corr">
+        <sup>*</sup> Equal Contribution, Alphabetical Order &nbsp;&middot;&nbsp;
+        <sup>&dagger;</sup> Project Lead &nbsp;&middot;&nbsp;
+        <sup>&#9993;</sup> Corresponding Authors
       </div>
-      <div class="works-list">
-        <!-- TODO: Replace with your lab's related works -->
-        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
-          <div class="work-info">
-            <!-- TODO: Replace with actual paper title -->
-            <h5>Paper Title 1</h5>
-            <!-- TODO: Replace with brief description -->
-            <p>Brief description of the work and its main contribution.</p>
-            <!-- TODO: Replace with venue and year -->
-            <span class="work-venue">Conference/Journal 2024</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <!-- TODO: Add more related works or remove extra items -->
-        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 2</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 3</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
+    </div>
+
+    <div class="pub-links">
+      <a href="https://recursivemas.github.io/" target="_blank" rel="noopener" class="pub-btn">
+        <span class="icon"><i class="fas fa-globe"></i></span><span>Website</span>
+      </a>
+      <a href="https://arxiv.org/abs/xxx" target="_blank" rel="noopener" class="pub-btn">
+        <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
+      </a>
+      <a href="https://github.com/RecursiveMAS/RecursiveMAS" target="_blank" rel="noopener" class="pub-btn">
+        <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+      </a>
+      <a href="https://huggingface.co/RecursiveMAS" target="_blank" rel="noopener" class="pub-btn">
+        <span class="icon">&#129303;</span><span>Models</span>
+      </a>
+      <a href="#bibtex" class="pub-btn">
+        <span class="icon"><i class="fas fa-quote-right"></i></span><span>Cite</span>
+      </a>
+    </div>
+
+    <!-- Headline metrics -->
+    <div class="metrics-strip">
+      <div class="metric-card">
+        <div class="metric-num">+8.3%</div>
+        <div class="metric-label">Avg. Accuracy Gain</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">2.4&times;</div>
+        <div class="metric-label">End-to-End Speedup</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">&minus;75.6%</div>
+        <div class="metric-label">Token Usage</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">5</div>
+        <div class="metric-label">Collaboration Styles &middot; 9 Benchmarks</div>
       </div>
     </div>
   </div>
+</section>
 
-  <main id="main-content">
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">Academic Project Page</h1>
-            <div class="is-size-5 publication-authors">
-              <!-- TODO: Replace with your paper authors and their personal links -->
-              <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
-                <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
-                  <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
-                  </span>
-                  </div>
+<!-- ============================================================
+     HERO TEASER FIGURE
+============================================================ -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="figure-card">
+      <img src="static/images/figures/hero_figure.png" alt="RecursiveMAS overview: scaling trend across recursion depths and generalization across collaboration patterns." loading="lazy">
+      <p class="figure-caption">
+        <b>Performance landscape across training/inference recursion depths (top)</b> &mdash; the lightweight
+        <i>RecursiveMAS</i> with sub&ndash;1.5B agents shows a clean scaling trend as recursion deepens.
+        <b>Generalization across common collaboration patterns (bottom)</b> &mdash; the scaled
+        <i>RecursiveMAS</i> seamlessly adapts to diverse multi-agent system structures.
+      </p>
+    </div>
+  </div>
+</section>
 
-                  <div class="is-size-5 publication-authors">
-                    <!-- TODO: Replace with your institution and conference/journal info -->
-                    <span class="author-block">Institution Name<br>Conference name and year</span>
-                    <!-- TODO: Remove this line if no equal contribution -->
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div>
+<!-- ============================================================
+     ABSTRACT
+============================================================ -->
+<section class="section rm-bg-soft">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.6rem;">
+      <span class="rm-eyebrow">Overview</span>
+      <h2 class="title is-3 rm-section-title">Abstract</h2>
+    </div>
+    <div class="abstract-box">
+      <p>
+        Recursive or looped language models have recently emerged as a new scaling axis by iteratively
+        refining the same model computation over latent states to deepen reasoning. We extend this scaling
+        principle from a single model to multi-agent systems, and ask:
+        <i>can agent collaboration itself be scaled through recursion?</i>
+      </p>
+      <p>
+        We introduce <b>RecursiveMAS</b>, a recursive multi-agent framework that casts the entire system
+        as a unified latent-space recursive computation. RecursiveMAS connects heterogeneous agents as a
+        collaboration loop through a lightweight <b>RecursiveLink</b> module, enabling
+        in-distribution latent thoughts generation and cross-agent latent state transfer. To optimize the
+        framework, we develop an <b>inner&ndash;outer loop learning algorithm</b> for iterative whole-system
+        co-optimization through shared gradient-based credit assignment across recursion rounds.
+      </p>
+      <p>
+        Theoretical analyses of runtime complexity and learning dynamics establish that RecursiveMAS is
+        more efficient than text-based MAS and maintains stable gradients during recursive training.
+        Empirically, we instantiate RecursiveMAS under <b>4 representative collaboration patterns</b> and
+        evaluate across <b>9 benchmarks</b> spanning mathematics, science, medicine, search, and code.
+        Compared with advanced single/multi-agent and recursive computation baselines, RecursiveMAS
+        consistently delivers an average accuracy improvement of
+        <span class="highlight-pill acc">+8.3%</span>, together with
+        <span class="highlight-pill speed">1.2&times;&ndash;2.4&times; speedup</span>, and
+        <span class="highlight-pill tok">34.6%&ndash;75.6% token reduction</span>.
+      </p>
+    </div>
+  </div>
+</section>
 
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- TODO: Update with your arXiv paper ID -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
+<!-- ============================================================
+     ARCHITECTURE OVERVIEW
+============================================================ -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <span class="rm-eyebrow">Architecture</span>
+      <h2 class="title is-3 rm-section-title">RecursiveMAS at a Glance</h2>
+      <p class="rm-section-sub">
+        RecursiveMAS treats the whole multi-agent system as a recursive computation graph.
+        Each agent acts like a layer of a recursive language model &mdash; passing
+        <i>latent thoughts</i> to the next, and looping the system's hidden stream across rounds.
+      </p>
+    </div>
 
-                    <!-- TODO: Add your supplementary material PDF or remove this section -->
-                    <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Supplementary</span>
-                    </a>
-                  </span>
+    <!-- ===== Part 1: Inner + Outer RecursiveLink (text left, plot right) ===== -->
+    <div class="arch-block">
+      <div class="arch-step">
+        <span class="arch-step-num">Part 1</span>
+        <h3 class="arch-step-title">A Lightweight RecursiveLink</h3>
+      </div>
+      <div class="arch-row">
+        <div class="arch-text">
+          <p>
+            The <b>RecursiveLink</b> is a small two-layer residual module that transmits an agent's
+            last-layer hidden states across two kinds of transitions.
+          </p>
 
-                  <!-- TODO: Replace with your GitHub repository URL -->
-                  <span class="link-block">
-                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
+          <div class="link-card">
+            <div class="link-card-head">
+              <span class="link-badge in">Inner Link</span>
+              <span class="link-card-sub">Latent thoughts inside an agent</span>
+            </div>
+            <p>
+              Maps the last-layer hidden state back into the input embedding space so the agent can
+              keep generating in continuous latent space &mdash; without ever projecting to tokens.
+            </p>
+          </div>
 
-                <!-- TODO: Update with your arXiv paper ID -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
+          <div class="link-card">
+            <div class="link-card-head">
+              <span class="link-badge out">Outer Link</span>
+              <span class="link-card-sub">Cross-agent latent transfer</span>
+            </div>
+            <p>
+              Adds a small projection so latent thoughts from one agent can be passed as conditioning
+              inputs to another agent &mdash; even with different hidden sizes.
+            </p>
+          </div>
+
+          <div class="insight-box" style="margin-top: 0.9rem;">
+            <b>Why residual?</b> The residual branch preserves the original latent semantics, so
+            RecursiveLink only needs to learn the <i>distributional shift</i> &mdash; making training
+            more stable and efficient.
+          </div>
+        </div>
+
+        <div class="arch-figure">
+          <div class="figure-card">
+            <img src="static/images/figures/RecursiveLink.png" alt="Inner and outer RecursiveLink illustrated as 2-layer residual modules connecting latent states." loading="lazy">
+            <p class="figure-caption">
+              <b>RecursiveLink.</b> Inner link refines latent thoughts within an agent;
+              outer link bridges hidden representations between heterogeneous agents.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Part 2: Overall looping structure ===== -->
+    <div class="arch-block">
+      <div class="arch-step">
+        <span class="arch-step-num">Part 2</span>
+        <h3 class="arch-step-title">Chaining All Agents into a Recursive Loop</h3>
+      </div>
+
+      <div class="figure-card" style="margin-bottom: 1.2rem;">
+        <img src="static/images/figures/RecursiveMAS.png" alt="Overall architecture of RecursiveMAS. Inner RecursiveLink performs latent thoughts generation; outer RecursiveLink transfers them across heterogeneous agents, forming a recursive loop." loading="lazy">
+        <p class="figure-caption">
+          <b>Overall Architecture.</b> Each agent first leverages the inner link to perform latent
+          thoughts generation, then transfers the generated information to the next agent through the
+          outer link. After the last agent finishes, its latent thoughts are fed back to the first
+          agent &mdash; closing a recursive loop within the multi-agent system.
+        </p>
+      </div>
+
+      <div class="arch-explain">
+        <p>
+          Each agent in RecursiveMAS acts like one layer of a recursive language model &mdash;
+          information flows <i>within</i> and <i>across</i> agents as the hidden stream of the system:
+        </p>
+        <ul class="arch-list">
+          <li>
+            <b>Inside an agent.</b> The inner link folds each generated hidden state back as the next
+            input, producing a sequence of latent thoughts entirely in continuous space.
+          </li>
+          <li>
+            <b>Across agents.</b> The outer link forwards those latent thoughts to the next agent,
+            which conditions on them together with its own input context.
+          </li>
+          <li>
+            <b>Closing the loop.</b> The last agent's latent outputs feed back to the first agent, so
+            each new round refines on top of the previous one. <b>Only the final round decodes
+            text</b> &mdash; all intermediate rounds collaborate purely in latent space.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== Part 3: Inner-Outer Loop Training ===== -->
+    <div class="arch-block">
+      <div class="arch-step">
+        <span class="arch-step-num">Part 3</span>
+        <h3 class="arch-step-title">Inner&ndash;Outer Loop Training</h3>
+      </div>
+
+      <div class="figure-card" style="margin-bottom: 1.2rem;">
+        <img src="static/images/figures/RecursiveLearning.png" alt="Two-stage inner-outer loop training pipeline for RecursiveMAS." loading="lazy">
+        <p class="figure-caption">
+          <b>Two-stage Training Pipeline.</b> An inner loop first warm-starts each agent in parallel
+          to align with latent thoughts generation; an outer loop then unrolls the full recursive
+          computation and jointly optimizes all RecursiveLinks at the system level.
+        </p>
+      </div>
+
+      <div class="arch-explain">
+        <div class="train-grid">
+          <div class="train-card">
+            <span class="train-tag inner">Inner Loop &middot; Model-Level</span>
+            <p>
+              For each agent $A_i$, we warm-start its inner link via a regression objective that
+              pushes generated latent thoughts toward the agent's own input-embedding distribution
+              of the ground-truth answer $y$:
+            </p>
+            <div class="eq-block">
+              $$\mathcal{L}_{\text{in}} = 1 - \cos\!\Big(\mathcal{R}_{\text{in}}(H),\;
+              \mathrm{Emb}_{\theta_i}(y)\Big)$$
+            </div>
+          </div>
+
+          <div class="train-card">
+            <span class="train-tag outer">Outer Loop &middot; System-Level</span>
+            <p>
+              Unroll the system for $n$ recursion rounds, then minimize a single cross-entropy on the
+              final textual prediction. Gradients back-propagate along the full recursive trace,
+              giving every outer link a shared global credit signal:
+            </p>
+            <div class="eq-block">
+              $$\mathcal{L}_{\text{out}} = \mathrm{CE}\!\left(
+              \mathcal{S}^{(n)}\!\big(\mathcal{S}^{(n-1)}(\cdots \mathcal{S}^{(1)}(x))\big),\;y\right)$$
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <!-- TODO: Replace with your teaser video -->
-      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
-        <!-- TODO: Add your video file path here -->
-        <source src="static/videos/banner_video.mp4" type="video/mp4">
-      </video>
-      <!-- TODO: Replace with your video description -->
-      <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <!-- TODO: Replace with your paper abstract -->
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
-          </p>
+        <div class="insight-box" style="margin-top: 1rem;">
+          <b>Lightweight by design.</b> All base-LLM parameters are frozen &mdash; only the inner
+          and outer links are trained &mdash; yielding ~13M trainable parameters (~0.31% of the
+          full system) while the whole MAS still co-evolves through recursion.
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End paper abstract -->
 
+<!-- ============================================================
+     THEORY
+============================================================ -->
+<section class="section rm-bg-tint">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <span class="rm-eyebrow">Why latent? Why recursion?</span>
+      <h2 class="title is-3 rm-section-title">Theoretical Insights</h2>
+      <p class="rm-section-sub">
+        Two analyses motivate why recursion in latent space, mediated by RecursiveLink, is preferable to
+        text-mediated agent interaction.
+      </p>
+    </div>
 
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
+    <div class="grid-2">
+      <div class="figure-card">
+        <h4 style="font-weight: 800; color: var(--rm-ink); margin-bottom: 0.5rem;">
+          <i class="fas fa-bolt" style="color: var(--rm-accent-warm); margin-right: 0.4rem;"></i>
+          Proposition 1 &mdash; Runtime Complexity
+        </h4>
+        <p style="color: var(--rm-sub);">
+          Text-based recursive MAS pays an expensive per-step decoding cost over the full vocabulary
+          $|V|$, while RecursiveMAS replaces it with a much cheaper latent-space transformation:
+        </p>
+        <div class="eq-block">
+          $$\Theta\!\big(N(m|V|d_h + (t+m)d_h^2 + (t+m)^2 d_h)\big)$$
+          <div style="text-align:center; color: var(--rm-sub); margin: 0.25rem 0;">vs.</div>
+          $$\Theta\!\big(N(m\,d_h^2 + (t+m)d_h^2 + (t+m)^2 d_h)\big)$$
+        </div>
+        <div class="insight-box" style="margin-top: 0.8rem;">
+          <b>Takeaway:</b> Since $d_h \ll |V|$ in practice, RecursiveMAS removes the per-step
+          vocabulary projection bottleneck across all $N$ agents and $m$ latent steps.
+        </div>
       </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
+
+      <div class="figure-card">
+        <h4 style="font-weight: 800; color: var(--rm-ink); margin-bottom: 0.5rem;">
+          <i class="fas fa-wave-square" style="color: var(--rm-violet); margin-right: 0.4rem;"></i>
+          Theorem 1 &mdash; Gradient Stability
+        </h4>
+        <p style="color: var(--rm-sub);">
+          Under realistic assumptions, when token predictions are confident (entropy $\le \epsilon$),
+          text-based recursive SFT suffers from <b>vanishing gradients</b>, while RecursiveLink
+          maintains <b>stable, near-constant</b> gradients across the looped backpropagation:
+        </p>
+        <div class="eq-block">
+          $$\left\|\tfrac{\partial \mathcal{R}_{\text{text}}(h)}{\partial h}\right\|_2 \le O(\epsilon) \ll 1$$
+          $$\left\|\tfrac{\partial \mathcal{R}(h)}{\partial h}\right\|_2 \ge \Omega\!\left(1 - \sqrt{\tfrac{1}{d_h}\log\tfrac{1}{\delta}}\right)$$
+        </div>
+        <div class="insight-box" style="margin-top: 0.8rem;">
+          <b>Takeaway:</b> Latent recursion preserves informative credit signals across rounds,
+          enabling stable whole-system co-optimization.
+        </div>
       </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
     </div>
   </div>
-</div>
-</div>
 </section>
-<!-- End image carousel -->
 
+<!-- ============================================================
+     COLLABORATION PATTERNS
+============================================================ -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1rem;">
+      <span class="rm-eyebrow">Plug-and-play</span>
+      <h2 class="title is-3 rm-section-title">Four Collaboration Patterns</h2>
+      <p class="rm-section-sub">
+        RecursiveMAS is structure-agnostic. We instantiate it under four representative patterns,
+        each composed of off-the-shelf agents from diverse model families.
+      </p>
+    </div>
 
+    <div class="pattern-grid">
+      <div class="pattern-card">
+        <div class="pattern-icon ic-seq"><i class="fas fa-stream"></i></div>
+        <h4>Sequential Style</h4>
+        <p>Three complementary roles progressively decompose, judge, refine, and solve a problem.</p>
+        <div class="pattern-roles">
+          <span class="role-chip">Planner</span>
+          <span class="role-chip">Critic</span>
+          <span class="role-chip">Solver</span>
+        </div>
+      </div>
 
+      <div class="pattern-card">
+        <div class="pattern-icon ic-mix"><i class="fas fa-layer-group"></i></div>
+        <h4>Mixture Style</h4>
+        <p>Domain specialists reason in parallel; a summarizer aggregates their latent outputs.</p>
+        <div class="pattern-roles">
+          <span class="role-chip">Math</span>
+          <span class="role-chip">Code</span>
+          <span class="role-chip">Science</span>
+          <span class="role-chip">Summarizer</span>
+        </div>
+      </div>
 
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- TODO: Replace with your YouTube video ID -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <div class="pattern-card">
+        <div class="pattern-icon ic-dis"><i class="fas fa-graduation-cap"></i></div>
+        <h4>Distillation Style</h4>
+        <p>A larger expert pairs with a smaller learner to distill capability while keeping inference fast.</p>
+        <div class="pattern-roles is-stacked">
+          <span class="role-chip">Expert</span>
+          <span class="role-chip">Learner</span>
+        </div>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-icon ic-del"><i class="fas fa-tools"></i></div>
+        <h4>Deliberation Style</h4>
+        <p>An inner-thinking reflector iteratively critiques a tool-calling agent (Python &amp; search).</p>
+        <div class="pattern-roles">
+          <span class="role-chip">Reflector</span>
+          <span class="role-chip">Tool-Caller</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compact agent config table -->
+    <div class="rm-table-wrap" style="margin-top: 2rem;">
+      <table class="rm-table roles-table">
+        <thead>
+          <tr>
+            <th>Collaboration Pattern</th>
+            <th>Role</th>
+            <th>Model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="3"><span class="pat-tag pat-seq">Sequential <span class="pat-sub">(Light)</span></span></td><td>Planner</td><td>Qwen3-1.7B</td></tr>
+          <tr><td>Critic</td><td>Llama3.2-1B-Instruct</td></tr>
+          <tr><td>Solver</td><td>Qwen2.5-Math-1.5B-Instruct</td></tr>
+
+          <tr><td rowspan="3"><span class="pat-tag pat-seq">Sequential <span class="pat-sub">(Scaled)</span></span></td><td>Planner</td><td>Gemma3-4B-it</td></tr>
+          <tr><td>Critic</td><td>Llama3.2-3B-Instruct</td></tr>
+          <tr><td>Solver</td><td>Qwen3.5-4B</td></tr>
+
+          <tr><td rowspan="4"><span class="pat-tag pat-mix">Mixture</span></td><td>Code Specialist</td><td>Qwen2.5-Coder-3B-Instruct</td></tr>
+          <tr><td>Science Specialist</td><td>BioMistral-7B</td></tr>
+          <tr><td>Math Specialist</td><td>DeepSeek-R1-Distill-Qwen-1.5B</td></tr>
+          <tr><td>Summarizer</td><td>Qwen3.5-2B</td></tr>
+
+          <tr><td rowspan="2"><span class="pat-tag pat-dis">Distillation</span></td><td>Expert</td><td>Qwen3.5-9B</td></tr>
+          <tr><td>Learner</td><td>Qwen3.5-4B</td></tr>
+
+          <tr><td rowspan="2"><span class="pat-tag pat-del">Deliberation</span></td><td>Reflector</td><td>Qwen3.5-4B</td></tr>
+          <tr><td>Tool-Caller</td><td>Qwen3.5-4B (Tool-Integration)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MAIN RESULTS
+============================================================ -->
+<section class="section rm-bg-soft">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <span class="rm-eyebrow">Main Results</span>
+      <h2 class="title is-3 rm-section-title">Whole-System Performance</h2>
+      <p class="rm-section-sub">
+        Under identical training budgets and matched MAS structure, RecursiveMAS consistently
+        outperforms strong single-agent, recursive, and multi-agent baselines.
+      </p>
+    </div>
+
+    <div class="rm-table-wrap">
+      <table class="rm-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>MATH500</th>
+            <th>AIME 2025</th>
+            <th>AIME 2026</th>
+            <th>GPQA-D</th>
+            <th>LiveCodeBench</th>
+            <th>MedQA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="group-head"><td colspan="7"><span class="gh-banner">Single-Agent Fine-tuning Baselines</span></td></tr>
+          <tr><td>Single Agent (LoRA)</td><td>83.1</td><td>70.0</td><td>73.3</td><td>62.0</td><td>37.4</td><td>76.1</td></tr>
+          <tr><td>Single Agent (Full-SFT)</td><td>83.2</td><td>73.3</td><td>76.7</td><td>62.8</td><td>38.6</td><td>77.0</td></tr>
+
+          <tr class="group-head"><td colspan="7"><span class="gh-banner">Multi-Agent Frameworks</span></td></tr>
+          <tr><td>Mixture-of-Agents (MoA)</td><td>79.8</td><td>60.0</td><td>63.3</td><td>47.6</td><td>27.0</td><td>57.5</td></tr>
+          <tr><td>TextGrad</td><td>84.9</td><td>73.3</td><td>76.7</td><td>62.5</td><td>39.8</td><td>77.2</td></tr>
+
+          <tr class="group-head"><td colspan="7"><span class="gh-banner">Recursion-based Methods</span></td></tr>
+          <tr><td>LoopLM</td><td>84.6</td><td>66.7</td><td>63.3</td><td>48.1</td><td>24.9</td><td>56.4</td></tr>
+          <tr><td>Recursive-TextMAS</td><td>85.8</td><td>73.3</td><td>73.3</td><td>61.6</td><td>38.7</td><td>77.0</td></tr>
+
+          <tr class="row-ours">
+            <td><b>RecursiveMAS (ours)</b></td>
+            <td>88.0</td><td>86.7</td><td>86.7</td><td>66.2</td><td>42.9</td><td>79.3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="figure-caption" style="margin-top: 1rem;">
+      RecursiveMAS at recursion round $r{=}3$. Best-in-column results across all categories.
+    </p>
+
+    <!-- Key Gains -->
+    <div class="gain-grid">
+      <div class="gain-card">
+        <div class="num">+8.3%</div>
+        <h5>Average accuracy gain</h5>
+        <p>over the strongest baseline on each benchmark, under matched training budgets.</p>
+      </div>
+      <div class="gain-card">
+        <div class="num">+18.1%</div>
+        <h5>AIME 2025 reasoning</h5>
+        <p>RecursiveMAS substantially closes the gap on logic-dense competition math.</p>
+      </div>
+      <div class="gain-card">
+        <div class="num">+13.0%</div>
+        <h5>Code Generation robustness</h5>
+        <p>Held-out hard code generation benchmark; gains preserved over recursion and text-MAS baselines.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RECURSION SCALING (Sequential)
+============================================================ -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <span class="rm-eyebrow">Scaling Behavior</span>
+      <h2 class="title is-3 rm-section-title">Performance Scales with Recursion Depth</h2>
+      <p class="rm-section-sub">
+        On the sequential-style MAS, RecursiveMAS continues to improve as recursion deepens, while
+        Recursive-TextMAS plateaus or regresses &mdash; the gap widens with $r$.
+      </p>
+    </div>
+
+    <div class="rm-table-wrap">
+      <table class="rm-table">
+        <thead>
+          <tr>
+            <th rowspan="2">Method</th>
+            <th rowspan="2">Metric</th>
+            <th colspan="2">Math500</th>
+            <th colspan="2">AIME 2025</th>
+            <th colspan="2">AIME 2026</th>
+            <th colspan="2">GPQA-D</th>
+            <th colspan="2">MedQA</th>
+            <th colspan="2">Code Gen.</th>
+            <th rowspan="2">Improve</th>
+          </tr>
+          <tr>
+            <th>Light</th><th>Scaled</th>
+            <th>Light</th><th>Scaled</th>
+            <th>Light</th><th>Scaled</th>
+            <th>Light</th><th>Scaled</th>
+            <th>Light</th><th>Scaled</th>
+            <th>Light</th><th>Scaled</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="group-head"><td colspan="12"><span class="gh-banner">Recursive Round r = 1</span></td></tr>
+          <tr>
+            <td rowspan="3">Recursive-TextMAS</td>
+            <td>Acc.</td>
+            <td>71.9</td><td>84.2</td><td>24.0</td><td>71.3</td><td>16.7</td><td>76.7</td>
+            <td>28.1</td><td>61.5</td><td>29.0</td><td>76.1</td><td>30.7</td><td>38.5</td>
+            <td style="color: var(--rm-sub);">Base</td>
+          </tr>
+          <tr><td>Time (s)</td>
+            <td>1368</td><td>2401</td><td>2380</td><td>8462</td><td>2216</td><td>9376</td>
+            <td>1056</td><td>2190</td><td>1555</td><td>1522</td><td>976</td><td>8867</td>
+            <td style="color: var(--rm-sub);">Base</td>
+          </tr>
+          <tr><td>Token</td>
+            <td>1185</td><td>1471</td><td>2993</td><td>9397</td><td>2754</td><td>8854</td>
+            <td>2084</td><td>3693</td><td>2382</td><td>1427</td><td>1146</td><td>3154</td>
+            <td style="color: var(--rm-sub);">Base</td>
+          </tr>
+
+          <tr class="row-ours"><td rowspan="3"><b>RecursiveMAS</b></td>
+            <td>Acc.</td>
+            <td>75.8</td><td>86.3</td><td>30.7</td><td>80.0</td><td>17.3</td><td>82.7</td>
+            <td>30.3</td><td>63.1</td><td>30.3</td><td>78.2</td><td>35.1</td><td>40.1</td>
+            <td class="delta-up">&uarr; +3.4</td>
+          </tr>
+          <tr class="row-ours"><td>Time (s)</td>
+            <td>825</td><td>1701</td><td>1829</td><td>7784</td><td>1788</td><td>8134</td>
+            <td>586</td><td>1965</td><td>1194</td><td>1348</td><td>449</td><td>7908</td>
+            <td class="delta-up">&times; 1.2</td>
+          </tr>
+          <tr class="row-ours"><td>Token</td>
+            <td>523</td><td>816</td><td>1622</td><td>6338</td><td>1576</td><td>7021</td>
+            <td>829</td><td>2675</td><td>1369</td><td>964</td><td>577</td><td>2198</td>
+            <td class="delta-down">&darr; 34.6%</td>
+          </tr>
+
+          <tr class="group-head"><td colspan="12"><span class="gh-banner">Recursive Round r = 2</span></td></tr>
+          <tr>
+            <td rowspan="3">Recursive-TextMAS</td>
+            <td>Acc.</td>
+            <td>72.5</td><td>84.4</td><td>23.3</td><td>70.7</td><td>10.0</td><td>77.3</td>
+            <td>28.7</td><td>59.1</td><td>28.3</td><td>76.1</td><td>30.0</td><td>38.0</td>
+            <td style="color: var(--rm-sub);">Base</td>
+          </tr>
+          <tr><td>Time (s)</td>
+            <td>2204</td><td>3958</td><td>4247</td><td>14380</td><td>3960</td><td>14110</td>
+            <td>1825</td><td>4207</td><td>3097</td><td>2745</td><td>1847</td><td>14792</td>
+            <td style="color: var(--rm-sub);">Base</td>
+          </tr>
+          <tr><td>Token</td>
+            <td>2117</td><td>2794</td><td>5318</td><td>16372</td><td>4982</td><td>16213</td>
+            <td>3708</td><td>6128</td><td>4436</td><td>2609</td><td>1998</td><td>5369</td>
+            <td style="color: var(--rm-sub);">Base</td>
+          </tr>
+
+          <tr class="row-ours"><td rowspan="3"><b>RecursiveMAS</b></td>
+            <td>Acc.</td>
+            <td>76.6</td><td>87.1</td><td>33.3</td><td>86.0</td><td>18.7</td><td>84.0</td>
+            <td>32.3</td><td>64.6</td><td>31.2</td><td>78.3</td><td>36.9</td><td>41.3</td>
+            <td class="delta-up">&uarr; +6.0</td>
+          </tr>
+          <tr class="row-ours"><td>Time (s)</td>
+            <td>1096</td><td>1974</td><td>2367</td><td>8178</td><td>2263</td><td>8965</td>
+            <td>752</td><td>2342</td><td>1427</td><td>1664</td><td>627</td><td>8329</td>
+            <td class="delta-up">&times; 1.9</td>
+          </tr>
+          <tr class="row-ours"><td>Token</td>
+            <td>495</td><td>953</td><td>1614</td><td>5314</td><td>1552</td><td>6657</td>
+            <td>813</td><td>2521</td><td>1383</td><td>1008</td><td>531</td><td>2020</td>
+            <td class="delta-down">&darr; 65.5%</td>
+          </tr>
+
+          <tr class="group-head"><td colspan="12"><span class="gh-banner">Recursive Round r = 3</span></td></tr>
+          <tr>
+            <td rowspan="3">Recursive-TextMAS</td>
+            <td>Acc.</td>
+            <td>69.1</td><td>85.8</td><td>18.0</td><td>73.3</td><td>16.7</td><td>74.7</td>
+            <td>28.7</td><td>58.6</td><td>28.5</td><td>77.1</td><td>29.3</td><td>36.5</td>
+            <td style="color: var(--rm-sub);">Base</td>
+          </tr>
+          <tr><td>Time (s)</td>
+            <td>2952</td><td>6010</td><td>6183</td><td>19304</td><td>5907</td><td>19678</td>
+            <td>3322</td><td>7537</td><td>4684</td><td>3922</td><td>2310</td><td>22036</td>
+            <td style="color: var(--rm-sub);">Base</td>
+          </tr>
+          <tr><td>Token</td>
+            <td>3059</td><td>4100</td><td>8645</td><td>23651</td><td>7813</td><td>22915</td>
+            <td>5820</td><td>8091</td><td>6307</td><td>3731</td><td>2676</td><td>7078</td>
+            <td style="color: var(--rm-sub);">Base</td>
+          </tr>
+
+          <tr class="row-ours"><td rowspan="3"><b>RecursiveMAS</b></td>
+            <td>Acc.</td>
+            <td>77.8</td><td>88.2</td><td>34.0</td><td>86.7</td><td>20.0</td><td>86.0</td>
+            <td>32.6</td><td>66.2</td><td>31.7</td><td>79.3</td><td>37.4</td><td>42.8</td>
+            <td class="delta-up">&uarr; +7.2</td>
+          </tr>
+          <tr class="row-ours"><td>Time (s)</td>
+            <td>1360</td><td>2320</td><td>2727</td><td>8981</td><td>2629</td><td>9623</td>
+            <td>861</td><td>2638</td><td>1704</td><td>1912</td><td>805</td><td>10186</td>
+            <td class="delta-up">&times; 2.4</td>
+          </tr>
+          <tr class="row-ours"><td>Token</td>
+            <td>519</td><td>893</td><td>1586</td><td>5342</td><td>1537</td><td>6860</td>
+            <td>786</td><td>2524</td><td>1378</td><td>1056</td><td>595</td><td>2247</td>
+            <td class="delta-down">&darr; 75.6%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Scaling heatmap -->
+    <div class="figure-card" style="margin-top: 2rem;">
+      <img src="static/images/figures/scaling.png" alt="Performance heatmap of RecursiveMAS across training and inference recursion depths." loading="lazy">
+      <p class="figure-caption">
+        <b>Train-time &times; Test-time recursion.</b>
+        Increasing inference depth keeps improving systems trained with fewer rounds, while deeper training
+        shifts the entire performance frontier upward - strongest results consistently appear in the
+        upper-right region.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EFFICIENCY
+============================================================ -->
+<section class="section rm-bg-tint">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <span class="rm-eyebrow">Efficiency</span>
+      <h2 class="title is-3 rm-section-title">Faster &amp; Cheaper as Recursion Deepens</h2>
+      <p class="rm-section-sub">
+        Because most rounds happen entirely in latent space, RecursiveMAS avoids repeated text decoding.
+        The advantage compounds with $r$.
+      </p>
+    </div>
+
+    <div class="figure-card" style="margin-bottom: 1.4rem;">
+      <img src="static/images/figures/inference_speedup.png" alt="Inference time speedup of RecursiveMAS over Recursive-TextMAS across recursion rounds." loading="lazy">
+      <p class="figure-caption">
+        <b>End-to-end inference time speedup</b> grows from <b>1.2&times;</b> at $r{=}1$ to
+        <b>1.9&times;</b> at $r{=}2$ to <b>2.4&times;</b> at $r{=}3$.
+      </p>
+    </div>
+    <div class="figure-card">
+      <img src="static/images/figures/token_speedup.png" alt="Token usage reduction of RecursiveMAS over Recursive-TextMAS across recursion rounds." loading="lazy">
+      <p class="figure-caption">
+        <b>Token-usage reduction</b> scales from <b>34.6%</b> at $r{=}1$ to <b>65.5%</b> at $r{=}2$ to
+        <b>75.6%</b> at $r{=}3$.
+      </p>
+    </div>
+
+    <!-- Cost analysis table -->
+    <div class="rm-table-wrap" style="margin-top: 2rem;">
+      <table class="rm-table">
+        <thead>
+          <tr>
+            <th>Training Method</th>
+            <th>Peak GPU Mem.</th>
+            <th>Trainable Params.</th>
+            <th>Estimated Cost</th>
+            <th>Avg. Accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>LoRA Training</td><td>21.67 GB</td><td>15.92M (0.37%)</td><td>$6.64</td><td>66.9</td></tr>
+          <tr><td>Full SFT</td><td>41.40 GB</td><td>4.21B (100%)</td><td>$9.67</td><td>68.6</td></tr>
+          <tr class="row-ours">
+            <td><b>RecursiveMAS (ours)</b></td>
+            <td><b>15.29 GB</b></td>
+            <td><b>13.12M (0.31%)</b></td>
+            <td><b>$4.27</b></td>
+            <td><b>74.9</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="figure-caption" style="margin-top: 0.6rem;">
+      With the lowest GPU memory, smallest trainable footprint, and lowest estimated cost,
+      RecursiveMAS still attains the highest average accuracy across all downstream tasks.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     GENERALIZATION (collaboration patterns)
+============================================================ -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <span class="rm-eyebrow">Generalization</span>
+      <h2 class="title is-3 rm-section-title">One Framework, Many Patterns</h2>
+      <p class="rm-section-sub">
+        Beyond sequential MAS, RecursiveMAS extends to mixture, distillation, and deliberation styles
+        with consistent gains over the strongest standalone agent in each setting.
+      </p>
+    </div>
+
+    <div class="figure-card">
+      <img src="static/images/figures/collaboration_patterns.png" alt="RecursiveMAS generalization across mixture, deliberation, and distillation collaboration patterns." loading="lazy">
+      <p class="figure-caption">
+        Across all three additional patterns, RecursiveMAS improves over the strongest standalone
+        agent. In <b>Distillation Style</b>, it boosts the smaller learner while preserving a
+        ~1.5&times; speed advantage over the expert.
+      </p>
+    </div>
+
+    <div class="gain-grid" style="margin-top: 1.4rem;">
+      <div class="gain-card">
+        <div class="num">+6.2%</div>
+        <h5>Mixture Style</h5>
+        <p>Beats the strongest single domain specialist via cross-domain composition.</p>
+      </div>
+      <div class="gain-card">
+        <div class="num">+4.8%</div>
+        <h5>Deliberation Style</h5>
+        <p>Recursive latent coordination remains effective with external tool use.</p>
+      </div>
+      <div class="gain-card">
+        <div class="num">+8.0%</div>
+        <h5>Distillation Style</h5>
+        <p>Lifts the learner while keeping a 1.5&times; speed edge over the expert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SEMANTIC EMBEDDINGS + LATENT STEPS  (HIDDEN)
+============================================================
+<section class="section rm-bg-soft">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <span class="rm-eyebrow">Inside the Loop</span>
+      <h2 class="title is-3 rm-section-title">What Latent Recursion Actually Does</h2>
+      <p class="rm-section-sub">
+        Deeper recursion progressively aligns RecursiveMAS's generated semantics with the ground-truth
+        distribution &mdash; and a <b>moderate latent budget</b> ($m \approx 80$) is sufficient.
+      </p>
+    </div>
+
+    <div class="figure-card" style="margin-bottom: 2rem;">
+      <img src="static/images/figures/embedding_analyses.png" alt="PCA visualization of RecursiveMAS-generated answer embeddings versus ground-truth across recursion rounds 1, 2, 3." loading="lazy">
+      <p class="figure-caption">
+        <b>Semantic alignment across recursion rounds.</b>
+        PCA of answer embeddings on 500 questions: at r=1 the generated distribution
+        (orange) is visibly shifted from ground
+        truth (purple); by r=3 the two are
+        largely overlapped &mdash; recursion iteratively refines latent embeddings toward correct answers.
+      </p>
+    </div>
+
+    <div class="figure-card">
+      <img src="static/images/figures/latentsteps.png" alt="Effectiveness of RecursiveMAS latent thoughts at varying step lengths m." loading="lazy">
+      <p class="figure-caption">
+        <b>Optimal latent-thought length.</b> Performance rises sharply with $m$ early on and stabilizes
+        around $m{=}80$ &mdash; effective collaboration with a modest latent budget, in contrast to
+        long-CoT text-based MAS.
+      </p>
+    </div>
+  </div>
+</section>
+============================================================ -->
+
+<!-- ============================================================
+     CASE STUDY (recursion rounds)
+============================================================ -->
+<section class="section rm-bg-dark">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <span class="rm-eyebrow">Case Study</span>
+      <h2 class="title is-3 rm-section-title">Recursion Self-Corrects across Rounds</h2>
+      <p class="rm-section-sub">
+        A common pattern across our case studies: an early round produces an incorrect answer; deeper
+        rounds successfully recover the right one through iterative latent refinement.
+      </p>
+    </div>
+
+    <div class="case-question">
+      <span class="label">MATH500 &middot; Question</span>
+      <p>
+        For how many positive integers $n > 1$ is $2^{24}$ a perfect $n^{\text{th}}$ power?
+      </p>
+    </div>
+
+    <div class="case-studies">
+      <div class="case-card r1">
+        <span class="case-tag"><i class="fas fa-circle-exclamation"></i> Round 1</span>
+        <span class="case-status"><i class="fas fa-times-circle"></i> Incorrect</span>
+        <div class="case-body">
+          <em>// RecursiveMAS final output, r = 1</em><br>
+          The model enumerates all factor pairs of 24 and reports six remaining cases after
+          excluding pairs with n = 1. It also accidentally drops the case n = 24, so its count is
+          off by one &mdash; an early-stage <b>double-counting</b> mistake.
+        </div>
+        <div class="case-answer">final = 6</div>
+      </div>
+
+      <div class="case-card r2">
+        <span class="case-tag"><i class="fas fa-rotate"></i> Round 2</span>
+        <span class="case-status"><i class="fas fa-check-circle"></i> Correct</span>
+        <div class="case-body">
+          <em>// RecursiveMAS final output, r = 2</em><br>
+          The latent loop reframes the problem: writing $2^{24}\!=\!2^{mn}$ shows perfect
+          n-th powers correspond to <b>divisors</b> of 24. Excluding n = 1, seven valid
+          divisors remain &mdash; the spurious factor-pair counting is gone.
+        </div>
+        <div class="case-answer">final = 7</div>
+      </div>
+
+      <div class="case-card r3">
+        <span class="case-tag"><i class="fas fa-infinity"></i> Round 3</span>
+        <span class="case-status"><i class="fas fa-check-circle"></i> Correct &amp; Cleaner</span>
+        <div class="case-body">
+          <em>// RecursiveMAS final output, r = 3</em><br>
+          The argument is now compact: n must divide 24, exclude n = 1, and report the count.
+          Latent recursion both <b>fixes the answer</b> and <b>shortens the reasoning trace</b>.
+        </div>
+        <div class="case-answer">final = 7</div>
+      </div>
+    </div>
+
+    <p class="rm-section-sub" style="margin-top: 1.6rem; text-align: center;">
+      Compared with text-mediated baselines, RecursiveMAS reaches the right answer in one fewer external
+      decoding cycle &mdash; intermediate rounds collaborate <i>without ever emitting tokens</i>.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABLATION (RecursiveLink)  (HIDDEN)
+============================================================
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <span class="rm-eyebrow">Ablation</span>
+      <h2 class="title is-3 rm-section-title">RecursiveLink Design Matters</h2>
+      <p class="rm-section-sub">
+        The 2-layer residual design wins across math, science, and code &mdash; the residual path
+        preserves latent semantics so the link only learns the distributional shift.
+      </p>
+    </div>
+
+    <div class="rm-table-wrap" style="max-width: 720px; margin: 0 auto;">
+      <table class="rm-table">
+        <thead>
+          <tr>
+            <th>RecursiveLink Design</th>
+            <th>Math500</th>
+            <th>GPQA-D</th>
+            <th>LiveCodeBench</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1-Layer</td><td>84.4</td><td>63.2</td><td>40.1</td></tr>
+          <tr><td>Res + 1-Layer</td><td>86.7</td><td>65.3</td><td>41.4</td></tr>
+          <tr><td>2-Layer</td><td>85.6</td><td>64.5</td><td>40.5</td></tr>
+          <tr class="row-ours"><td><b>Res + 2-Layer (ours)</b></td><td>88.0</td><td>66.2</td><td>42.9</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+============================================================ -->
+
+<!-- ============================================================
+     EXAMPLES ACROSS DOWNSTREAM TASKS  (from Appendix G)
+============================================================ -->
+<section class="section ex-bg">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <span class="rm-eyebrow">Examples</span>
+      <h2 class="title is-3 rm-section-title">RecursiveMAS Across Downstream Tasks</h2>
+      <p class="rm-section-sub">
+        Four end-to-end traces from the paper's appendix &mdash; one per domain. Recursion rounds
+        1 and 2 happen entirely in latent space; only the final round emits text. Scroll horizontally
+        or use the arrows to navigate.
+      </p>
+    </div>
+
+    <div class="carousel-wrap">
+      <button class="carousel-arrow prev" onclick="exScroll(-1)" aria-label="Previous example">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-arrow next" onclick="exScroll(1)" aria-label="Next example">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <div class="ex-track" id="exTrack">
+
+        <!-- ===== Example 1: Mathematical Reasoning ===== -->
+        <article class="ex-card" data-accent="math">
+          <header class="ex-head">
+            <span class="ex-badge"><i class="fas fa-square-root-variable"></i> Mathematical Reasoning</span>
+            <span class="ex-bench">AIME 2026</span>
+          </header>
+          <div class="ex-question">
+            <span class="ex-q-label">Question</span>
+            <p>
+              A plane contains points $A$ and $B$ with $AB = 1$. Point $A$ is rotated counterclockwise
+              through an acute angle $\theta$ around $B$ to point $A'$. Then $B$ is rotated clockwise
+              through angle $\theta$ around $A'$ to point $B'$. If $AB' = \tfrac{4}{3}$, and
+              $\cos\theta = \tfrac{m}{n}$ with $\gcd(m,n)=1$, find $m + n$.
+            </p>
           </div>
-        </div>
+          <div class="ex-rounds">
+            <div class="ex-round latent">
+              <span class="ex-round-tag">Round 1 &middot; latent</span>
+              <span class="ex-flow">Planner &rarr; Critic &rarr; Solver</span>
+            </div>
+            <div class="ex-round latent">
+              <span class="ex-round-tag">Round 2 &middot; latent</span>
+              <span class="ex-flow">Planner &rarr; Critic &rarr; Solver</span>
+            </div>
+            <div class="ex-round final">
+              <span class="ex-round-tag final">Round 3 &middot; text output</span>
+              <div class="ex-final-body">
+                <p>
+                  Place $B$ at the origin and $A$ at $(1, 0)$. After rotating $A$ around $B$ by
+                  $\theta$, $A' = (\cos\theta, \sin\theta)$. Rotating $B$ clockwise by $\theta$ around
+                  $A'$ gives $B' = (\cos\theta - 1,\;\sin\theta)$.
+                </p>
+                <p>
+                  Then $AB' = \sqrt{(\cos\theta - 2)^2 + \sin^2\theta} = \sqrt{5 - 4\cos\theta}$.
+                  Setting $\sqrt{5 - 4\cos\theta} = \tfrac{4}{3}$ and squaring yields
+                  $\cos\theta = \tfrac{29}{36}$, so $m + n = 29 + 36$.
+                </p>
+              </div>
+              <div class="ex-answer correct">
+                <i class="fas fa-check-circle"></i> Final Answer: $\boxed{65}$
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===== Example 2: Scientific & Medical ===== -->
+        <article class="ex-card" data-accent="med">
+          <header class="ex-head">
+            <span class="ex-badge"><i class="fas fa-stethoscope"></i> Scientific &amp; Medical</span>
+            <span class="ex-bench">MedQA</span>
+          </header>
+          <div class="ex-question">
+            <span class="ex-q-label">Question</span>
+            <p>
+              A 45-year-old mechanic presents with acute shortness of breath while repairing a
+              tractor. He is pale and diaphoretic; <i>pupils are constricted</i>; diffuse wheezes
+              are noted in all lung fields. What is the best treatment?
+            </p>
+            <ul class="ex-choices">
+              <li><b>A.</b> Succinylcholine</li>
+              <li><b>B.</b> Inhaled ipratropium and oxygen</li>
+              <li><b>C.</b> Atropine and pralidoxime</li>
+              <li><b>D.</b> Inhaled albuterol and oxygen</li>
+            </ul>
+          </div>
+          <div class="ex-rounds">
+            <div class="ex-round latent">
+              <span class="ex-round-tag">Round 1 &middot; latent</span>
+              <span class="ex-flow">Planner &rarr; Critic &rarr; Solver</span>
+            </div>
+            <div class="ex-round latent">
+              <span class="ex-round-tag">Round 2 &middot; latent</span>
+              <span class="ex-flow">Planner &rarr; Critic &rarr; Solver</span>
+            </div>
+            <div class="ex-round final">
+              <span class="ex-round-tag final">Round 3 &middot; text output</span>
+              <div class="ex-final-body">
+                <p>
+                  The presentation &mdash; miosis, bronchospasm, diaphoresis, agricultural exposure
+                  &mdash; is a classic <b>cholinergic crisis from organophosphate poisoning</b>
+                  (SLUDGE: salivation, lacrimation, urination, defecation, GI upset, emesis).
+                </p>
+                <p>
+                  Atropine reverses muscarinic effects (secretions, bronchospasm); pralidoxime
+                  reactivates acetylcholinesterase to address nicotinic effects. Albuterol or
+                  ipratropium alone treats only local bronchospasm; succinylcholine worsens
+                  paralysis.
+                </p>
+              </div>
+              <div class="ex-answer correct">
+                <i class="fas fa-check-circle"></i> Final Answer: $\boxed{C}$
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===== Example 3: Code Generation ===== -->
+        <article class="ex-card" data-accent="code">
+          <header class="ex-head">
+            <span class="ex-badge"><i class="fas fa-code"></i> Code Generation</span>
+            <span class="ex-bench">MBPP+</span>
+          </header>
+          <div class="ex-question">
+            <span class="ex-q-label">Question</span>
+            <p>
+              Write a function to check whether each element of a second tuple is strictly smaller
+              than its corresponding element in a first tuple.
+            </p>
+          </div>
+          <div class="ex-rounds">
+            <div class="ex-round latent">
+              <span class="ex-round-tag">Round 1 &middot; latent</span>
+              <span class="ex-flow">Planner &rarr; Critic &rarr; Solver</span>
+            </div>
+            <div class="ex-round latent">
+              <span class="ex-round-tag">Round 2 &middot; latent</span>
+              <span class="ex-flow">Planner &rarr; Critic &rarr; Solver</span>
+            </div>
+            <div class="ex-round final">
+              <span class="ex-round-tag final">Round 3 &middot; text output</span>
+              <div class="ex-final-body">
+                <p>Plan: validate equal lengths, then compare element-wise; return False on any violation.</p>
+                <pre class="ex-code"><code>def check_smaller(tuple1, tuple2):
+    if len(tuple1) != len(tuple2):
+        return False
+    for i in range(len(tuple1)):
+        if tuple1[i] &lt;= tuple2[i]:
+            return False
+    return True</code></pre>
+              </div>
+              <div class="ex-answer correct">
+                <i class="fas fa-check-circle"></i> Passes all hidden test cases
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===== Example 4: Search-based QA ===== -->
+        <article class="ex-card" data-accent="search">
+          <header class="ex-head">
+            <span class="ex-badge"><i class="fas fa-magnifying-glass"></i> Search-based QA</span>
+            <span class="ex-bench">Bamboogle</span>
+          </header>
+          <div class="ex-question">
+            <span class="ex-q-label">Question</span>
+            <p>Who was president of the United States in the year that Citibank was founded?</p>
+          </div>
+          <div class="ex-rounds">
+            <div class="ex-round latent">
+              <span class="ex-round-tag">Round 1 &middot; latent</span>
+              <span class="ex-flow">Reflector &rarr; Tool-Caller</span>
+            </div>
+            <div class="ex-round latent">
+              <span class="ex-round-tag">Round 2 &middot; latent</span>
+              <span class="ex-flow">Reflector &rarr; Tool-Caller</span>
+            </div>
+            <div class="ex-round final">
+              <span class="ex-round-tag final">Round 3 &middot; text output</span>
+              <div class="ex-final-body">
+                <p>Decompose into two sub-questions, then chain web searches.</p>
+                <pre class="ex-code"><code>&lt;search&gt;When was Citibank founded?&lt;/search&gt;
+&lt;result&gt;Chartered on June 16, 1812 in New York
+       under the name "City Bank of New York".&lt;/result&gt;
+
+&lt;search&gt;President of the United States 1812&lt;/search&gt;
+&lt;result&gt;James Madison was president during the
+       War of 1812.&lt;/result&gt;</code></pre>
+                <p style="margin-top: 0.4rem;">Citibank was founded in <b>1812</b>; the U.S. president that year was <b>James Madison</b>.</p>
+              </div>
+              <div class="ex-answer correct">
+                <i class="fas fa-check-circle"></i> Final Answer: $\boxed{\text{James Madison}}$
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- progress dots -->
+      <div class="ex-dots" id="exDots">
+        <button class="ex-dot is-active" onclick="exGoTo(0)" aria-label="Example 1"></button>
+        <button class="ex-dot" onclick="exGoTo(1)" aria-label="Example 2"></button>
+        <button class="ex-dot" onclick="exGoTo(2)" aria-label="Example 3"></button>
+        <button class="ex-dot" onclick="exGoTo(3)" aria-label="Example 4"></button>
       </div>
     </div>
   </div>
 </section>
-<!-- End youtube video -->
 
-
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
+<!-- ============================================================
+     BIBTEX
+============================================================ -->
+<section class="section rm-bg-soft" id="bibtex">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 1rem;">
+      <span class="rm-eyebrow">Cite</span>
+      <h2 class="title is-3 rm-section-title">BibTeX</h2>
+    </div>
+    <div class="bibtex-box">
+      <button class="bibtex-copy" onclick="copyBibTeX()" title="Copy BibTeX">
+        <i class="fas fa-copy"></i>&nbsp;Copy
+      </button>
+      <pre id="bibtex-code">@article{yang2026recursivemas,
+  title   = {Recursive Multi-Agent Systems},
+  author  = {Yang, Xiyuan and Zou, Jiaru and Pan, Rui and Qiu, Ruizhong and Lu, Pan
+             and Diao, Shizhe and Jiang, Jindong and Tong, Hanghang and Zhang, Tong
+             and Buehler, Markus J. and He, Jingrui and Zou, James},
+  journal = {arXiv preprint},
+  year    = {2026},
+  url     = {https://recursivemas.github.io}
+}</pre>
     </div>
   </div>
 </section>
-<!-- End video carousel -->
 
+</main>
 
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
-      </div>
-    </div>
-  </section>
-<!--End paper poster -->
-
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <div class="bibtex-header">
-        <h2 class="title">BibTeX</h2>
-        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-          <i class="fas fa-copy"></i>
-          <span class="copy-text">Copy</span>
-        </button>
-      </div>
-      <pre id="bibtex-code"><code>@article{YourPaperKey2024,
-  title={Your Paper Title Here},
-  author={First Author and Second Author and Third Author},
-  journal={Conference/Journal Name},
-  year={2024},
-  url={https://your-domain.com/your-project-page}
-}</code></pre>
-    </div>
-</section>
-<!--End BibTex citation -->
-
-
-  <footer class="footer">
+<footer class="footer">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-8">
+      <div class="column is-8 has-text-centered">
         <div class="content">
-
           <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
+            <b>RecursiveMAS</b> &middot;
+            UIUC &middot; Stanford University &middot; NVIDIA &middot; MIT
           </p>
-
+          <p style="font-size: 0.9rem;">
+            Page template adapted from the
+            <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>
+            and <a href="https://nerfies.github.io" target="_blank">Nerfies</a>.
+            Licensed under
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+<script>
+  function copyBibTeX() {
+    var code = document.getElementById('bibtex-code').innerText;
+    navigator.clipboard.writeText(code).then(function() {
+      var btn = document.querySelector('.bibtex-copy');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i>&nbsp;Copied';
+      setTimeout(function() { btn.innerHTML = orig; }, 1600);
+    });
+  }
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-    <!-- End of Statcounter Code -->
+  /* ===== Examples carousel ===== */
+  function exGetTrack() { return document.getElementById('exTrack'); }
+  function exCardWidth() {
+    var track = exGetTrack(); if (!track) return 0;
+    var card = track.querySelector('.ex-card');
+    if (!card) return track.clientWidth;
+    var styles = window.getComputedStyle(track);
+    var gap = parseFloat(styles.columnGap || styles.gap || 0) || 0;
+    return card.offsetWidth + gap;
+  }
+  function exScroll(dir) {
+    var track = exGetTrack(); if (!track) return;
+    track.scrollBy({ left: dir * exCardWidth(), behavior: 'smooth' });
+  }
+  function exGoTo(idx) {
+    var track = exGetTrack(); if (!track) return;
+    track.scrollTo({ left: idx * exCardWidth(), behavior: 'smooth' });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var track = exGetTrack(); if (!track) return;
+    var dots = document.querySelectorAll('#exDots .ex-dot');
+    track.addEventListener('scroll', function() {
+      var w = exCardWidth();
+      if (!w) return;
+      var idx = Math.round(track.scrollLeft / w);
+      dots.forEach(function(d, i) { d.classList.toggle('is-active', i === idx); });
+    }, { passive: true });
+  });
+</script>
 
-  </body>
-  </html>
+</body>
+</html>
