@@ -557,8 +557,8 @@
     const zoneRect = document.getElementById('agentsZone').getBoundingClientRect();
     const lmRect   = lmHead.getBoundingClientRect();
     // Place chip to the right of LM Head, vertically near its bottom
-    const left = lmRect.right - zoneRect.left + 8;
-    const top  = lmRect.bottom - zoneRect.top + 4;    // 4px below LM Head's bottom edge
+    const left = lmRect.right - zoneRect.left - 30;
+    const top  = lmRect.bottom - zoneRect.top + 5;    // 4px below LM Head's bottom edge
     loopingChip.style.left = left + 'px';
     loopingChip.style.top  = top  + 'px';
   }
