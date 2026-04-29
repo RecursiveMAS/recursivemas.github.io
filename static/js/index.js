@@ -36,39 +36,55 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Copy BibTeX to clipboard
+// Copy BibTeX to clipboard (project page: #bibtex-code; button: .bibtex-copy or template .copy-bibtex-btn)
 function copyBibTeX() {
     const bibtexElement = document.getElementById('bibtex-code');
-    const button = document.querySelector('.copy-bibtex-btn');
-    const copyText = button.querySelector('.copy-text');
-    
-    if (bibtexElement) {
-        navigator.clipboard.writeText(bibtexElement.textContent).then(function() {
-            // Success feedback
+    if (!bibtexElement) return;
+
+    const text = bibtexElement.textContent;
+    const button = document.querySelector('.bibtex-copy') || document.querySelector('.copy-bibtex-btn');
+    const copyText = button && button.querySelector ? button.querySelector('.copy-text') : null;
+
+    const showSuccess = function () {
+        if (!button) return;
+        if (copyText) {
+            const orig = copyText.textContent;
+            copyText.textContent = 'Copied';
             button.classList.add('copied');
-            copyText.textContent = 'Cop';
-            
-            setTimeout(function() {
+            setTimeout(function () {
+                copyText.textContent = orig;
                 button.classList.remove('copied');
-                copyText.textContent = 'Copy';
             }, 2000);
-        }).catch(function(err) {
-            console.error('Failed to copy: ', err);
-            // Fallback for older browsers
-            const textArea = document.createElement('textarea');
-            textArea.value = bibtexElement.textContent;
-            document.body.appendChild(textArea);
-            textArea.select();
+        } else {
+            const orig = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i>&nbsp;Copied';
+            setTimeout(function () {
+                button.innerHTML = orig;
+            }, 1600);
+        }
+    };
+
+    const fallbackCopy = function () {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.setAttribute('readonly', '');
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
             document.execCommand('copy');
-            document.body.removeChild(textArea);
-            
-            button.classList.add('copied');
-            copyText.textContent = 'Cop';
-            setTimeout(function() {
-                button.classList.remove('copied');
-                copyText.textContent = 'Copy';
-            }, 2000);
-        });
+            showSuccess();
+        } catch (e) {
+            console.error('Copy failed:', e);
+        }
+        document.body.removeChild(textArea);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(showSuccess).catch(fallbackCopy);
+    } else {
+        fallbackCopy();
     }
 }
 

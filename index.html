@@ -441,20 +441,36 @@
     /* ====== BIBTEX / CITE ====== */
     .bibtex-box {
       background: #0f172a; color: #e2e8f0;
-      border-radius: 18px; padding: 1.3rem 1.5rem;
-      font-family: 'JetBrains Mono', monospace; font-size: 0.86rem;
+      border-radius: 18px;
+      padding: 1.65rem 1.5rem 1.85rem 1.75rem;
+      font-family: 'JetBrains Mono', 'SFMono-Regular', ui-monospace, monospace;
+      font-size: 0.88rem;
       overflow-x: auto;
       box-shadow: 0 18px 40px rgba(15,23,42,0.18);
       position: relative;
+      line-height: 1.6;
     }
-    .bibtex-box pre { background: transparent !important; color: inherit !important; padding: 0 !important; margin: 0 !important; white-space: pre; }
+    .bibtex-box pre {
+      background: transparent !important;
+      color: inherit !important;
+      margin: 0.35rem 0 0 0 !important;
+      padding: 0.4rem 5.75rem 0.2rem 0.15rem !important;
+      white-space: pre;
+      line-height: 1.85;
+      font-size: 0.9rem;
+      letter-spacing: 0.015em;
+    }
     .bibtex-copy {
-      position: absolute; top: 0.9rem; right: 1rem;
+      position: absolute; top: 1.1rem; right: 1.1rem;
+      z-index: 1;
       background: rgba(255,255,255,0.08); color: #e2e8f0;
-      padding: 0.35rem 0.7rem; border-radius: 8px; cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.12); font-size: 0.78rem;
+      padding: 0.5rem 0.85rem; border-radius: 10px; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.8rem;
+      line-height: 1.2;
     }
     .bibtex-copy:hover { background: rgba(255,255,255,0.16); }
+    .bibtex-copy.copied { background: rgba(34,197,94,0.25); border-color: rgba(34,197,94,0.4); }
 
     /* ====== FOOTER ====== */
     footer.footer { background: #f8fafc; border-top: 1px solid var(--rm-line); }
@@ -1977,22 +1993,24 @@
 ============================================================ -->
 <section class="section rm-bg-soft" id="bibtex">
   <div class="container is-max-desktop">
-    <div class="has-text-centered" style="margin-bottom: 1rem;">
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
       <span class="rm-eyebrow">Cite</span>
-      <h2 class="title is-3 rm-section-title">BibTeX</h2>
+      <h2 class="title is-3 rm-section-title" style="margin-bottom: 0.35rem;">BibTeX</h2>
     </div>
     <div class="bibtex-box">
       <button class="bibtex-copy" onclick="copyBibTeX()" title="Copy BibTeX">
         <i class="fas fa-copy"></i>&nbsp;Copy
       </button>
       <pre id="bibtex-code">@misc{recursivemas,
-      title={Recursive Multi-Agent Systems}, 
-      author={Xiyuan Yang and Jiaru Zou and Rui Pan and Ruizhong Qiu and Pan Lu and Shizhe Diao and Jindong Jiang and Hanghang Tong and Tong Zhang and Markus J. Buehler and Jingrui He and James Zou},
-      year={2026},
-      eprint={2604.25917},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2604.25917}, 
+  title   = {Recursive Multi-Agent Systems},
+  author  = {Xiyuan Yang and Jiaru Zou and Rui Pan and Ruizhong Qiu
+             and Pan Lu and Shizhe Diao and Jindong Jiang and Hanghang Tong
+             and Tong Zhang and Markus J. Buehler and Jingrui He and James Zou},
+  year    = {2026},
+  eprint  = {2604.25917},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url     = {https://arxiv.org/abs/2604.25917},
 }</pre>
     </div>
   </div>
@@ -2023,15 +2041,6 @@
 </footer>
 
 <script>
-  function copyBibTeX() {
-    var code = document.getElementById('bibtex-code').innerText;
-    navigator.clipboard.writeText(code).then(function() {
-      var btn = document.querySelector('.bibtex-copy');
-      var orig = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-check"></i>&nbsp;Copied';
-      setTimeout(function() { btn.innerHTML = orig; }, 1600);
-    });
-  }
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
