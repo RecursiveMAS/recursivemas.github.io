@@ -174,7 +174,49 @@
       border: 1px solid var(--rm-line); box-shadow: none; cursor: not-allowed;
     }
     .pub-btn.is-disabled:hover { transform: none; background: #fff; }
-    .pub-btn .icon { font-size: 1rem; }
+    .pub-btn .icon {
+      width: 1.15rem; min-width: 1.15rem;
+      height: 1.15rem;
+      font-size: 1rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      line-height: 1;
+      color: #fff;
+    }
+    .pub-btn.icon-only {
+      width: 2.65rem; height: 2.65rem;
+      padding: 0;
+      justify-content: center;
+    }
+    .pub-btn.brand-arxiv .icon { color: #b31b1b; }
+    .pub-btn.brand-code .icon,
+    .pub-btn.brand-x .icon {
+      width: 1.22rem; min-width: 1.22rem; height: 1.22rem;
+      color: #000;
+      background: #fff;
+      border-radius: 50%;
+    }
+    .pub-btn.brand-code .icon i { font-size: 0.82rem; }
+    .pub-btn.brand-demo .icon { color: var(--rm-accent); }
+    .pub-btn.brand-youtube .icon { color: #ff0000; }
+    .pub-btn.brand-contact .icon { color: #f59e0b; }
+    .pub-btn.brand-cite .icon { color: #a78bfa; }
+    .pub-btn.brand-vb .icon { color: #ef4444; }
+    .brand-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 1.15rem; height: 1.15rem;
+      font-weight: 800; line-height: 1;
+    }
+    .brand-mark.x-mark {
+      width: 0.72rem;
+      height: 0.72rem;
+    }
+    .brand-mark.vb-mark {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: -0.04em;
+      border: 1px solid currentColor;
+      border-radius: 3px;
+    }
 
     /* ====== KEY METRIC PILLS ====== */
     .metrics-strip {
@@ -222,6 +264,258 @@
       font-size: 0.78rem; margin-bottom: 0.4rem; display: block;
     }
     .rm-section-sub { color: var(--rm-sub); max-width: 880px; margin: 0.8rem auto 0; }
+
+    /* ====== PLAYGROUND NOTE ====== */
+    .playground-note {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(67,56,202,0.22);
+      background:
+        linear-gradient(135deg, rgba(67,56,202,0.11), rgba(14,165,233,0.13)),
+        #fff;
+      box-shadow: 0 18px 42px rgba(15,23,42,0.08);
+      padding: 1.25rem 1.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .playground-note::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 6px;
+      background: linear-gradient(180deg, var(--rm-primary), var(--rm-accent));
+    }
+    .playground-note-main {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 0;
+    }
+    .playground-note-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: #0f172a;
+      color: var(--rm-accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      box-shadow: 0 10px 22px rgba(15,23,42,0.16);
+      font-size: 1.15rem;
+    }
+    .playground-note-label {
+      display: block;
+      color: var(--rm-primary);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .playground-note h3 {
+      margin: 0;
+      color: var(--rm-ink);
+      font-size: 1.2rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .playground-note p {
+      margin: 0.25rem 0 0;
+      color: var(--rm-sub);
+      line-height: 1.55;
+      font-size: 0.94rem;
+    }
+    .playground-note-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      flex: 0 0 auto;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      color: #fff !important;
+      background: #0f172a;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 22px rgba(15,23,42,0.16);
+      transition: all 0.2s ease;
+    }
+    .playground-note-btn:hover {
+      transform: translateY(-2px);
+      background: var(--rm-primary);
+    }
+    @media (max-width: 760px) {
+      .playground-note {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 1.1rem 1.1rem 1.15rem;
+      }
+      .playground-note-main { align-items: flex-start; }
+      .playground-note-btn { width: 100%; }
+    }
+
+    /* ====== YOUTUBE TUTORIAL ====== */
+    .tutorial-wrap {
+      position: relative;
+      border-radius: 22px;
+      padding: 0.85rem;
+      background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(135deg, rgba(67,56,202,0.55), rgba(14,165,233,0.55)) border-box;
+      border: 1px solid transparent;
+      box-shadow: 0 18px 42px rgba(15,23,42,0.08);
+      overflow: hidden;
+    }
+    .tutorial-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(420px 160px at 12% 0%, rgba(99,102,241,0.13), transparent 65%),
+        radial-gradient(420px 160px at 88% 0%, rgba(14,165,233,0.13), transparent 65%);
+      pointer-events: none;
+    }
+    .tutorial-media {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #0f172a;
+      aspect-ratio: 16 / 9;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+    }
+    .tutorial-media iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .tutorial-start {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      padding: 0;
+      color: #fff;
+      background: #0f172a;
+      cursor: pointer;
+      overflow: hidden;
+      isolation: isolate;
+      font-family: inherit;
+    }
+    .tutorial-start img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.78;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .tutorial-start::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(15,23,42,0.86), rgba(15,23,42,0.22) 58%, rgba(15,23,42,0.72)),
+        radial-gradient(circle at 50% 50%, rgba(239,68,68,0.18), transparent 32%);
+      z-index: -1;
+    }
+    .tutorial-start:hover img {
+      transform: scale(1.035);
+      opacity: 0.9;
+    }
+    .tutorial-start-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .tutorial-play {
+      width: 76px;
+      height: 54px;
+      border-radius: 16px;
+      background: #ff0000;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 16px 34px rgba(0,0,0,0.28);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      transition: transform 0.2s ease;
+    }
+    .tutorial-start:hover .tutorial-play { transform: scale(1.06); }
+    .tutorial-start-title {
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.28);
+    }
+    .tutorial-start-sub {
+      color: #dbeafe;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .tutorial-caption {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 0.2rem 0.1rem;
+      color: var(--rm-sub);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+    .tutorial-caption b { color: var(--rm-ink); }
+    .tutorial-caption-main {
+      display: flex;
+      flex-direction: column;
+      gap: 0.18rem;
+    }
+    .tutorial-credit {
+      color: var(--rm-primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .tutorial-credit a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(67,56,202,0.45);
+    }
+    .tutorial-credit a:hover {
+      color: var(--rm-violet);
+      border-bottom-color: var(--rm-violet);
+    }
+    .tutorial-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex: 0 0 auto;
+      color: #b91c1c;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .tutorial-link:hover { color: #ef4444; }
+    @media (max-width: 760px) {
+      .tutorial-caption {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
 
     /* ====== ABSTRACT ====== */
     .abstract-box {
@@ -862,24 +1156,40 @@
 
     <div class="pub-links">
       <a href="https://huggingface.co/papers/2604.25917" target="_blank" rel="noopener" class="pub-btn" title="Paper on Hugging Face Daily Papers">
-        <span class="icon" aria-hidden="true">&#x1F917;</span><span>HF Paper</span>
+        <span class="icon" aria-hidden="true">&#x1F917;</span><span>Paper</span>
       </a>
-      <a href="https://recursivemas.github.io/" target="_blank" rel="noopener" class="pub-btn">
-        <span class="icon"><i class="fas fa-globe"></i></span><span>Website</span>
+      <a href="https://github.com/RecursiveMAS/RecursiveMAS" target="_blank" rel="noopener" class="pub-btn brand-code">
+        <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
       </a>
-      <a href="https://arxiv.org/abs/2604.25917" target="_blank" rel="noopener" class="pub-btn">
+      <a href="https://vishalmysore.github.io/recursiveMASDemo/" target="_blank" rel="noopener" class="pub-btn brand-demo">
+        <span class="icon"><i class="fas fa-desktop"></i></span><span>Demo</span>
+      </a>
+      <a href="https://arxiv.org/abs/2604.25917" target="_blank" rel="noopener" class="pub-btn brand-arxiv">
         <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
       </a>
-      <a href="https://github.com/RecursiveMAS/RecursiveMAS" target="_blank" rel="noopener" class="pub-btn">
-        <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+      <a href="https://www.youtube.com/watch?v=dUmT0OIGoqE" target="_blank" rel="noopener" class="pub-btn brand-youtube">
+        <span class="icon"><i class="fab fa-youtube"></i></span><span>YouTube</span>
       </a>
       <a href="https://huggingface.co/RecursiveMAS" target="_blank" rel="noopener" class="pub-btn">
         <span class="icon">&#129303;</span><span>Models</span>
       </a>
-      <a href="mailto:jiaru@stanford.edu" class="pub-btn">
+      <a href="https://huggingface.co/RecursiveMAS/datasets" target="_blank" rel="noopener" class="pub-btn">
+        <span class="icon" aria-hidden="true">&#x1F917;</span><span>Data</span>
+      </a>
+      <a href="https://venturebeat.com/ai/how-recursivemas-speeds-up-multi-agent-inference-by-2-4x-and-reduces-token-usage-by-75" target="_blank" rel="noopener" class="pub-btn brand-vb">
+        <span class="icon"><span class="brand-mark vb-mark" aria-hidden="true">VB</span></span><span>VentureBeat</span>
+      </a>
+      <a href="https://x.com/Jiaru_Zou/status/2049551828296389118" target="_blank" rel="noopener" class="pub-btn brand-x" title="X post">
+        <span class="icon">
+          <svg class="brand-mark x-mark" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.654l-5.214-6.817-5.965 6.817H1.686l7.73-8.835L1.254 2.25h6.823l4.713 6.231 5.454-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"></path>
+          </svg>
+        </span><span>Post</span>
+      </a>
+      <a href="mailto:jiaru@stanford.edu" class="pub-btn brand-contact">
         <span class="icon"><i class="fas fa-envelope"></i></span><span>Contact</span>
       </a>
-      <a href="#bibtex" class="pub-btn">
+      <a href="#bibtex" class="pub-btn brand-cite">
         <span class="icon"><i class="fas fa-quote-right"></i></span><span>Cite</span>
       </a>
     </div>
@@ -908,9 +1218,34 @@
 
 
 <!-- ============================================================
+     PLAYGROUND NOTE
+============================================================ -->
+<section class="section" style="padding-top: 1.2rem; padding-bottom: 0.05rem;">
+  <div class="container is-max-desktop">
+    <div class="playground-note">
+      <div class="playground-note-main">
+        <span class="playground-note-icon" aria-hidden="true">
+          <i class="fas fa-desktop"></i>
+        </span>
+        <div>
+          <span class="playground-note-label">Interactive Playground</span>
+          <h3>Try RecursiveMAS Yourself</h3>
+          <p>Explore the playground demo to see RecursiveMAS in action with an interactive workflow.</p>
+        </div>
+      </div>
+      <a href="https://vishalmysore.github.io/recursiveMASDemo/" target="_blank" rel="noopener" class="playground-note-btn">
+        <span>Open Playground</span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
      LIVE DEMO (interactive animation)
 ============================================================ -->
-<section class="section" style="padding-top: 1.2rem; padding-bottom: 1.2rem;">
+<section class="section" style="padding-top: 0.25rem; padding-bottom: 1.2rem;">
   <div class="container is-max-desktop">
     <div class="animation-embed">
       <iframe
@@ -919,6 +1254,46 @@
         loading="lazy"
         scrolling="no">
       </iframe>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     YOUTUBE TUTORIAL
+============================================================ -->
+<section class="section" style="padding-top: 0.8rem; padding-bottom: 1.5rem;">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom: 0.65rem;">
+      <span class="rm-eyebrow">Walkthrough</span>
+      <h2 class="title is-3 rm-section-title">YouTube Tutorial</h2>
+      <p class="rm-section-sub" style="margin-top: 0.3rem;">Watch a concise walkthrough of the RecursiveMAS paper, key ideas, and results.</p>
+    </div>
+    <div class="tutorial-wrap">
+      <div class="tutorial-media">
+        <button
+          type="button"
+          class="tutorial-start"
+          data-youtube-embed="https://www.youtube-nocookie.com/embed/dUmT0OIGoqE?rel=0&origin=https%3A%2F%2Frecursivemas.github.io"
+          aria-label="Start the RecursiveMAS YouTube tutorial">
+          <img src="https://i.ytimg.com/vi/dUmT0OIGoqE/maxresdefault.jpg" alt="" loading="lazy">
+          <span class="tutorial-start-content">
+            <span class="tutorial-play" aria-hidden="true"><i class="fas fa-play"></i></span>
+            <span class="tutorial-start-title">YouTube Tutorial</span>
+            <span class="tutorial-start-sub">Start the video here</span>
+          </span>
+        </button>
+      </div>
+      <div class="tutorial-caption">
+        <span class="tutorial-caption-main">
+          <span><b>RecursiveMAS tutorial:</b> a guided walkthrough of the paper's motivation, method, and findings.</span>
+          <span class="tutorial-credit">Thanks <a href="https://www.youtube.com/@TwoMinutePapers" target="_blank" rel="noopener">Two Minute Papers</a> for featuring RecursiveMAS!</span>
+        </span>
+        <a href="https://www.youtube.com/watch?v=dUmT0OIGoqE&source_ve_path=MTc4NDI0" target="_blank" rel="noopener" class="tutorial-link">
+          <i class="fab fa-youtube" aria-hidden="true"></i>
+          <span>Watch video on YouTube</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -2077,7 +2452,43 @@
 
     /* ===== Slot-machine count-up for hero metric numbers ===== */
     initMetricSlots();
+    initStableBibtexScroll();
   });
+
+  function initStableBibtexScroll() {
+    var citeLinks = document.querySelectorAll('a[href="#bibtex"]');
+    var bibtex = document.getElementById('bibtex');
+    if (!citeLinks.length || !bibtex) return;
+
+    function scrollToBibtex() {
+      bibtex.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function stableScrollToBibtex() {
+      if (history.pushState) {
+        history.pushState(null, '', '#bibtex');
+      } else {
+        window.location.hash = 'bibtex';
+      }
+
+      // Re-apply after likely layout shifts from lazy images, iframes, and MathJax.
+      [0, 120, 320, 700, 1200].forEach(function(delay) {
+        setTimeout(scrollToBibtex, delay);
+      });
+    }
+
+    citeLinks.forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        stableScrollToBibtex();
+      });
+    });
+
+    if (window.location.hash === '#bibtex') {
+      stableScrollToBibtex();
+      window.addEventListener('load', stableScrollToBibtex, { once: true });
+    }
+  }
 
   function initMetricSlots() {
     var nums = document.querySelectorAll('.metric-num');
@@ -2169,6 +2580,21 @@
       });
     }
   }
+
+  var tutorialStarts = document.querySelectorAll('[data-youtube-embed]');
+  tutorialStarts.forEach(function(startButton) {
+    startButton.addEventListener('click', function() {
+      var embedUrl = startButton.getAttribute('data-youtube-embed');
+      var iframe = document.createElement('iframe');
+      iframe.src = embedUrl + '&autoplay=1';
+      iframe.title = 'RecursiveMAS YouTube Tutorial';
+      iframe.loading = 'lazy';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.referrerPolicy = 'origin-when-cross-origin';
+      iframe.allowFullscreen = true;
+      startButton.replaceWith(iframe);
+    });
+  });
 </script>
 
 </body>
