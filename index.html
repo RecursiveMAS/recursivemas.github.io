@@ -2716,6 +2716,8 @@
     var tocToggle = document.querySelector('.toc-head[aria-controls="tocLinks"]');
     var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc-link[href^="#"]'));
     if (!tocLinks.length) return;
+    var tocScrollLock = false;
+    var tocScrollLockTimer = null;
 
     function setTocExpanded(isExpanded) {
       if (!tocRail || !tocToggle) return;
@@ -2750,13 +2752,20 @@
         var target = document.querySelector(link.getAttribute('href'));
         if (!target) return;
         event.preventDefault();
+        tocScrollLock = true;
+        clearTimeout(tocScrollLockTimer);
         setActive(target.id, true);
         stableScrollToElement(target, link.getAttribute('href'));
+        tocScrollLockTimer = setTimeout(function() {
+          tocScrollLock = false;
+          setActive(target.id, true);
+        }, 1600);
       });
     });
 
     if ('IntersectionObserver' in window && sections.length) {
       var observer = new IntersectionObserver(function(entries) {
+        if (tocScrollLock) return;
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             setActive(entry.target.id, true);
