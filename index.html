@@ -264,6 +264,207 @@
       font-size: 0.78rem; margin-bottom: 0.4rem; display: block;
     }
     .rm-section-sub { color: var(--rm-sub); max-width: 880px; margin: 0.8rem auto 0; }
+    section[id] { scroll-margin-top: 32px; }
+
+    /* ====== TABLE OF CONTENTS ====== */
+    .toc-section {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 40;
+      width: 178px;
+      padding: 0;
+      pointer-events: none;
+    }
+    .toc-section > .container {
+      width: 100%;
+      max-width: none !important;
+    }
+    .toc-rail {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(226,232,240,0.92);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.92), rgba(248,250,252,0.86)),
+        rgba(255,255,255,0.86);
+      box-shadow: 0 18px 42px rgba(15,23,42,0.10);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      pointer-events: auto;
+      max-height: calc(100vh - 2rem);
+      transition: width 0.2s ease, box-shadow 0.2s ease;
+    }
+    .toc-rail::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--rm-primary), var(--rm-accent), var(--rm-accent-warm));
+    }
+    .toc-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0.75rem;
+    }
+    .toc-head {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      width: 100%;
+      flex: 0 0 auto;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--rm-ink);
+      white-space: nowrap;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .toc-head:hover .toc-badge { transform: translateY(-1px); background: var(--rm-primary); }
+    .toc-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f172a;
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(15,23,42,0.16);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .toc-title {
+      display: block;
+      color: var(--rm-ink);
+      font-size: 0.92rem;
+      font-weight: 800;
+      line-height: 1.1;
+      flex: 1;
+      text-align: left;
+    }
+    .toc-expand {
+      width: 26px;
+      height: 26px;
+      border-radius: 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rm-primary);
+      background: rgba(99,102,241,0.10);
+      font-size: 0.74rem;
+      transition: transform 0.22s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .toc-rail:not(.is-collapsed) .toc-expand {
+      transform: rotate(180deg);
+      background: var(--rm-primary);
+      color: #fff;
+    }
+    .toc-links {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.38rem;
+      overflow-y: auto;
+      max-height: calc(100vh - 6.3rem);
+      scroll-padding-block: 0.5rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(99,102,241,0.42) transparent;
+      padding: 0.7rem 0.05rem 0.1rem;
+      margin-top: 0.65rem;
+      border-top: 1px solid rgba(148,163,184,0.24);
+      opacity: 1;
+      transform: translateY(0);
+      transition: max-height 0.24s ease, opacity 0.18s ease, transform 0.2s ease, margin-top 0.2s ease, padding 0.2s ease, border-color 0.2s ease;
+    }
+    .toc-rail.is-collapsed .toc-links {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      margin-top: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-top-color: transparent;
+    }
+    .toc-links::-webkit-scrollbar { width: 6px; }
+    .toc-links::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.42); border-radius: 999px; }
+    .toc-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.38rem;
+      flex: 0 0 auto;
+      min-height: 34px;
+      padding: 0.48rem 0.62rem;
+      border-radius: 12px;
+      border: 1px solid rgba(226,232,240,0.92);
+      background: rgba(255,255,255,0.78);
+      color: #334155;
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1;
+      text-decoration: none;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .toc-link i {
+      color: var(--rm-primary);
+      font-size: 0.78rem;
+      width: 1rem;
+      text-align: center;
+      flex: 0 0 auto;
+    }
+    .toc-link:hover {
+      transform: translateX(2px);
+      border-color: rgba(99,102,241,0.34);
+      color: var(--rm-primary);
+      box-shadow: 0 8px 18px rgba(67,56,202,0.09);
+    }
+    .toc-link.is-active {
+      background: linear-gradient(120deg, var(--rm-primary), var(--rm-accent));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 10px 22px rgba(67,56,202,0.22);
+    }
+    .toc-link.is-active i { color: #fff; }
+    @media (max-width: 760px) {
+      .toc-section {
+        top: 0.75rem;
+        left: 0.75rem;
+        width: 158px;
+      }
+      .toc-inner {
+        padding: 0.55rem;
+      }
+      .toc-badge {
+        width: 32px;
+        height: 32px;
+      }
+      .toc-title {
+        font-size: 0.88rem;
+      }
+      .toc-expand {
+        width: 24px;
+        height: 24px;
+      }
+      .toc-links {
+        max-height: calc(100vh - 5.5rem);
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        padding-right: 0;
+      }
+      .toc-link {
+        min-height: 32px;
+        padding: 0.44rem 0.55rem;
+        border-radius: 12px;
+      }
+      .toc-link:hover {
+        transform: translateX(1px);
+      }
+    }
 
     /* ====== PLAYGROUND NOTE ====== */
     .playground-note {
@@ -803,7 +1004,7 @@
       height: 900px;
       border: 0;
       background: transparent;
-      border-radius: 18px;          /* 跟容器圆角一致，让 iframe 内容也有圆角 */
+      border-radius: 18px;
     }
     @media (max-width: 1280px) { .animation-embed iframe { height: 880px; } }
     @media (max-width: 768px)  { .animation-embed iframe { height: 780px; } }
@@ -1218,9 +1419,42 @@
 
 
 <!-- ============================================================
+     TABLE OF CONTENTS
+============================================================ -->
+<section class="section toc-section" aria-label="Section navigation">
+  <div class="container is-max-desktop">
+    <nav class="toc-rail is-collapsed" aria-label="Contents">
+      <div class="toc-inner">
+        <button class="toc-head" type="button" aria-expanded="false" aria-controls="tocLinks">
+          <span class="toc-badge" aria-hidden="true"><i class="fas fa-list-ul"></i></span>
+          <span class="toc-title">Contents</span>
+          <span class="toc-expand" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="toc-links" id="tocLinks">
+          <a class="toc-link is-active" href="#playground"><i class="fas fa-play-circle" aria-hidden="true"></i><span>Demo</span></a>
+          <a class="toc-link" href="#youtube-tutorial"><i class="fab fa-youtube" aria-hidden="true"></i><span>Tutorial</span></a>
+          <a class="toc-link" href="#abstract"><i class="fas fa-align-left" aria-hidden="true"></i><span>Abstract</span></a>
+          <a class="toc-link" href="#architecture"><i class="fas fa-project-diagram" aria-hidden="true"></i><span>Architecture</span></a>
+          <a class="toc-link" href="#theory"><i class="fas fa-bolt" aria-hidden="true"></i><span>Theory</span></a>
+          <a class="toc-link" href="#patterns"><i class="fas fa-layer-group" aria-hidden="true"></i><span>Patterns</span></a>
+          <a class="toc-link" href="#results"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Results</span></a>
+          <a class="toc-link" href="#scaling"><i class="fas fa-infinity" aria-hidden="true"></i><span>Scaling</span></a>
+          <a class="toc-link" href="#efficiency"><i class="fas fa-tachometer-alt" aria-hidden="true"></i><span>Efficiency</span></a>
+          <a class="toc-link" href="#generalization"><i class="fas fa-share-alt" aria-hidden="true"></i><span>Generalization</span></a>
+          <a class="toc-link" href="#case-study"><i class="fas fa-sync-alt" aria-hidden="true"></i><span>Case Study</span></a>
+          <a class="toc-link" href="#examples"><i class="fas fa-clone" aria-hidden="true"></i><span>Examples</span></a>
+          <a class="toc-link" href="#bibtex"><i class="fas fa-quote-right" aria-hidden="true"></i><span>Cite</span></a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</section>
+
+
+<!-- ============================================================
      PLAYGROUND NOTE
 ============================================================ -->
-<section class="section" style="padding-top: 1.2rem; padding-bottom: 0.05rem;">
+<section class="section" id="playground" style="padding-top: 1.2rem; padding-bottom: 0.05rem;">
   <div class="container is-max-desktop">
     <div class="playground-note">
       <div class="playground-note-main">
@@ -1245,7 +1479,7 @@
 <!-- ============================================================
      LIVE DEMO (interactive animation)
 ============================================================ -->
-<section class="section" style="padding-top: 0.25rem; padding-bottom: 1.2rem;">
+<section class="section" id="demo" style="padding-top: 0.25rem; padding-bottom: 1.2rem;">
   <div class="container is-max-desktop">
     <div class="animation-embed">
       <iframe
@@ -1262,7 +1496,7 @@
 <!-- ============================================================
      YOUTUBE TUTORIAL
 ============================================================ -->
-<section class="section" style="padding-top: 0.8rem; padding-bottom: 1.5rem;">
+<section class="section" id="youtube-tutorial" style="padding-top: 0.8rem; padding-bottom: 1.5rem;">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 0.65rem;">
       <span class="rm-eyebrow">Walkthrough</span>
@@ -1302,7 +1536,7 @@
 <!-- ============================================================
      ABSTRACT
 ============================================================ -->
-<section class="section rm-bg-soft">
+<section class="section rm-bg-soft" id="abstract">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 1.6rem;">
       <span class="rm-eyebrow">Overview</span>
@@ -1341,7 +1575,7 @@
 <!-- ============================================================
      HERO TEASER FIGURE
 ============================================================ -->
-<section class="section">
+<section class="section" id="overview">
   <div class="container is-max-desktop">
     <div class="figure-card">
       <img src="static/images/figures/hero_figure.png" alt="RecursiveMAS overview: scaling trend across recursion depths and generalization across collaboration patterns." loading="lazy">
@@ -1359,7 +1593,7 @@
 <!-- ============================================================
      ARCHITECTURE OVERVIEW
 ============================================================ -->
-<section class="section">
+<section class="section" id="architecture">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 1.5rem;">
       <span class="rm-eyebrow">Architecture</span>
@@ -1523,7 +1757,7 @@
 <!-- ============================================================
      THEORY
 ============================================================ -->
-<section class="section rm-bg-tint">
+<section class="section rm-bg-tint" id="theory">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 1.5rem;">
       <span class="rm-eyebrow">Why latent? Why recursion?</span>
@@ -1581,7 +1815,7 @@
 <!-- ============================================================
      COLLABORATION PATTERNS
 ============================================================ -->
-<section class="section">
+<section class="section" id="patterns">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 1rem;">
       <span class="rm-eyebrow">Plug-and-play</span>
@@ -1675,7 +1909,7 @@
 <!-- ============================================================
      MAIN RESULTS
 ============================================================ -->
-<section class="section rm-bg-soft">
+<section class="section rm-bg-soft" id="results">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 1.5rem;">
       <span class="rm-eyebrow">Main Results</span>
@@ -1748,7 +1982,7 @@
 <!-- ============================================================
      RECURSION SCALING (Sequential)
 ============================================================ -->
-<section class="section">
+<section class="section" id="scaling">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 1.5rem;">
       <span class="rm-eyebrow">Scaling Behavior</span>
@@ -1910,7 +2144,7 @@
 <!-- ============================================================
      EFFICIENCY
 ============================================================ -->
-<section class="section rm-bg-tint">
+<section class="section rm-bg-tint" id="efficiency">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 1.5rem;">
       <span class="rm-eyebrow">Efficiency</span>
@@ -1971,7 +2205,7 @@
 <!-- ============================================================
      GENERALIZATION (collaboration patterns)
 ============================================================ -->
-<section class="section">
+<section class="section" id="generalization">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 1.5rem;">
       <span class="rm-eyebrow">Generalization</span>
@@ -2051,7 +2285,7 @@
 <!-- ============================================================
      CASE STUDY (recursion rounds)
 ============================================================ -->
-<section class="section rm-bg-dark">
+<section class="section rm-bg-dark" id="case-study">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 1.5rem;">
       <span class="rm-eyebrow">Case Study</span>
@@ -2152,7 +2386,7 @@
 <!-- ============================================================
      EXAMPLES ACROSS DOWNSTREAM TASKS  (from Appendix G)
 ============================================================ -->
-<section class="section ex-bg">
+<section class="section ex-bg" id="examples">
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom: 1.5rem;">
       <span class="rm-eyebrow">Examples</span>
@@ -2452,29 +2686,99 @@
 
     /* ===== Slot-machine count-up for hero metric numbers ===== */
     initMetricSlots();
+    initTocNav();
     initStableBibtexScroll();
   });
 
+  function stableScrollToElement(target, hash) {
+    if (!target) return;
+
+    if (hash) {
+      if (history.pushState) {
+        history.pushState(null, '', hash);
+      } else {
+        window.location.hash = hash.replace(/^#/, '');
+      }
+    }
+
+    function scrollToTarget() {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Re-apply after likely layout shifts from lazy images, iframes, and MathJax.
+    [0, 120, 320, 700, 1200].forEach(function(delay) {
+      setTimeout(scrollToTarget, delay);
+    });
+  }
+
+  function initTocNav() {
+    var tocRail = document.querySelector('.toc-rail');
+    var tocToggle = document.querySelector('.toc-head[aria-controls="tocLinks"]');
+    var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc-link[href^="#"]'));
+    if (!tocLinks.length) return;
+
+    function setTocExpanded(isExpanded) {
+      if (!tocRail || !tocToggle) return;
+      tocRail.classList.toggle('is-collapsed', !isExpanded);
+      tocToggle.setAttribute('aria-expanded', String(isExpanded));
+    }
+
+    if (tocToggle) {
+      tocToggle.addEventListener('click', function() {
+        setTocExpanded(tocRail.classList.contains('is-collapsed'));
+      });
+    }
+
+    var sections = tocLinks.map(function(link) {
+      return document.querySelector(link.getAttribute('href'));
+    }).filter(Boolean);
+
+    function setActive(id, shouldScrollLink) {
+      var activeLink = null;
+      tocLinks.forEach(function(link) {
+        var isActive = link.getAttribute('href') === '#' + id;
+        link.classList.toggle('is-active', isActive);
+        if (isActive) activeLink = link;
+      });
+      if (shouldScrollLink && activeLink && (!tocRail || !tocRail.classList.contains('is-collapsed'))) {
+        activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    tocLinks.forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        var target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+        event.preventDefault();
+        setActive(target.id, true);
+        stableScrollToElement(target, link.getAttribute('href'));
+      });
+    });
+
+    if ('IntersectionObserver' in window && sections.length) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id, true);
+          }
+        });
+      }, { rootMargin: '-34% 0px -58% 0px', threshold: 0.01 });
+      sections.forEach(function(section) { observer.observe(section); });
+    }
+
+    if (window.location.hash) {
+      var initial = document.querySelector(window.location.hash);
+      if (initial) setActive(initial.id, true);
+    }
+  }
+
   function initStableBibtexScroll() {
-    var citeLinks = document.querySelectorAll('a[href="#bibtex"]');
+    var citeLinks = document.querySelectorAll('a[href="#bibtex"]:not(.toc-link)');
     var bibtex = document.getElementById('bibtex');
     if (!citeLinks.length || !bibtex) return;
 
-    function scrollToBibtex() {
-      bibtex.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
     function stableScrollToBibtex() {
-      if (history.pushState) {
-        history.pushState(null, '', '#bibtex');
-      } else {
-        window.location.hash = 'bibtex';
-      }
-
-      // Re-apply after likely layout shifts from lazy images, iframes, and MathJax.
-      [0, 120, 320, 700, 1200].forEach(function(delay) {
-        setTimeout(scrollToBibtex, delay);
-      });
+      stableScrollToElement(bibtex, '#bibtex');
     }
 
     citeLinks.forEach(function(link) {
